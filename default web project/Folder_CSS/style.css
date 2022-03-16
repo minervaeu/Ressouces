@@ -1,0 +1,125 @@
+/* #region table of content */
+/*    
+!                             Project  Main-CSS-Stylsheet
+?                                    powered by
+!                                     Stefan Bartl
+!                      (WKDSteVIE / WKDMinerva)
+?                                          2021                                                                                                                                                                        
+?                  ________________________________                                                                                                                                                                                                  
+!                                   table of content
+
+?                                     1) general                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                   */
+/*#endregion*/
+
+/* #region jobs to-do */
+/*
+!                           to-do 
+todo    default
+?                               finish
+todo    default
+!                         session progress                                                
+? -)                                                                                                                                                                                             
+*/
+/* #endregion */
+
+/* #region 1) general */
+
+:root {
+     /*  ==================  
+?        ===  Colour-Palette  ===
+          ==================  */
+
+  --prime-blueviolett: hsl(238, 56%, 19%);
+  --prime-darkgrey: hsl(330, 2%, 17%);
+  --prime-green: hsl(95, 63%, 36%);
+  --prime-yellow: hsl(43, 100%, 50%);
+  --prime-manner: hsl(10, 60%, 80%);
+  --prime-lightgrey: hsl(71, 13%, 67%);
+  --prime-pink: hsl(330, 100%, 50%);
+  --prime-pinkviolett: hsl(300, 100%, 50%);
+
+  --base-colour: hsl(201, 79%, 46%);
+  --main-black: hsl(0, 0%, 0%);
+  --main-red: hsl(0, 100%, 50%);
+
+  --base-border: hsl(0, 0%, 100%);
+  --gameboard: hsl(240, 100%, 49%);
+  --cornsilk: hsl(48, 100%, 93%);
+  --top-header: hsl(39, 77%, 83%);
+
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* #region Resets */
+
+/* box-sizing */
+*, *::before, *::after {
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
+} 
+
+/* margins */
+body,
+h1, h2, h3, h4, h5, h6,
+figure, picture {
+  margin: 0;
+}
+
+/* set up the body*/
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* make form elements easier to work with */ 
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* remove animations for people who turned them off*/
+@media (prefers-reduced-motion: reduce){
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+/* #endregion */
+
+/*#region fonts */
+
+/* Page: Sans-serif,   font-family: "Anton", sans-serif; */
+@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
+
+
+/* Headlines: Handwriting, font-family: "Comforter Brush", cursive; */
+@import url("https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap");
+
+/* #endregion */
+
+/* #endregion */
+
+/* #region bonus jobs and ideas for future */
+/*
+todo  default
+*/
+/* #endregion */
