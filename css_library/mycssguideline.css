@@ -18,6 +18,7 @@ https://developer.chrome.com/docs/devtools/
 - Visbug nutzen!
 - //unsplah.it/740/740 generiert random image mit 740x740
 - vor allem { ein Leerzeich setzen trägtt zur beserren Lesbarkeit bei! 
+- Font Awesome Kit Code: <script src="https://kit.fontawesome.com/1fb3eb29fd.js" crossorigin="anonymous"></script>
 */
 
 /* allgemein
@@ -49,10 +50,17 @@ https://www.youtube.com/watch?v=U9VF-4euyRo&t=124s
 
 todo     border
     border: 0; entfernt die border width.
+
 todo     margin
-    margin-left: auto; --> nimmt den Platz rechts und halbiert ihn.
-    margin: auto; interresant für nav-Listen ul li:nth-of-type(5) selektiert das 5te li-Element inder Liste. Ist es das letzte li, kannst du es mit margin-left: auto; ganz nach rechts schieben! Ein zusätzliches  margin-rihgt: aut; centert es daann
-https://www.youtube.com/watch?v=3LlLkapKw6Q
+      schiebt die Box von anderen Elementen weg 
+      margin-left: auto; nimmt allen whitespace von rechts und schiebt ihn nach links.
+      margin: 0 auto; zentriert und macht explizit das auf top und bottom 0 ist 
+      interresant für nav-Listen ul li:nth-of-type(5) selektiert das 5te li-Element inder Liste. Ist es das letzte li, kannst du es mit margin-left: auto; ganz nach rechts schieben! Ein zusätzliches  margin-rihgt: aut; centert es daann
+      https://www.youtube.com/watch?v=3LlLkapKw6Q
+
+todo   padding 
+      schiebt den content von der Box weg
+
 todo     Buttons
     Animation mit brightness oder saturation langsam hoch fahren
     Hat ein Button einen border, kannst du dem anderen einen Border in der Farbe seines Hintergrundes geben damit die width/height ausgeglichen wird.
@@ -197,12 +205,18 @@ https://developer.mozilla.org/de/docs/Web/CSS/CSS_Selectors
 /* pseudoelemente / pseudoklassen
 ?                                                        Pseudoelemente
 
-- ::after / ::before für zb.: Punkt -> Strich Animation, Icons über url, pdf files etc...
+todo  ::after / ::before 
+            für zb.: Punkt -> Strich Animation, Icons über url, pdf files etc...
+
+todo ::marker    
+            Styling vom Punkt oder der Numerierung bei lists
+            color, font, transitions... möglich
+            content: '' ;                                                                 
+            font-family: 'Font Awesome 5 Free'; font-weigth: 700; content; '\f00c';  + Font Awesome Kit macht zb Haken, funktioniert mit der Nummer in FA; parentEL > li {paddig-left: schebt den marker weg vom text} 
 
 */
 
 /* allgemeines
-
 ?                                                       Allgemeines
 
 - CSS-Background Cliptext einsetzen für "ausdem nichts kommen Effekt"
@@ -316,7 +330,6 @@ to {
 
 /*#region click-jumping durch dokument mit anker */
 
-todo        click-jumping in document
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 3rem;
