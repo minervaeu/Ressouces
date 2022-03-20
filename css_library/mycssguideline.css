@@ -112,6 +112,10 @@ todo        z-index
 
 todo        shape-outside
       Kann Text um etwas herum stylen
+
+todo        line-clamp
+      Damit schneidet man den Text ab wenn das parent-element zu klein wird.
+      https://css-tricks.com/almanac/properties/l/line-clamp/
 */
 
 /* flexbox & grid
@@ -369,9 +373,7 @@ section:target b > h2 {
   height: 1rem;
   background-color: pink;
 }
-.element::after + :hover {
-  width: 5rem;
-}
+
 .element:hover:after {
   width: 100%;
 }
@@ -400,3 +402,36 @@ HTML:
             ::-webkit-resizer — the draggable resizing handle that appears at the bottom corner of some element
 */
 /*#endregion*/
+
+/* #region socail media links without font awesome*/
+/*
+<div id="div_socialmedia">
+<h3 id="headline_socialmedia">Über die sozialen Medien</h3>
+<div id="wrapper_socialicons">
+    <a href="https://www.facebook.com/barstevie/" target="_blank"><img src="folder_graphics/icons/facebook/facebook-original.svg" alt="Facebook-Logo with profile link." class="img_socialmedias" id="img_socialmedia1"></a>
+    <a href="https://www.youtube.com/channel/UCVUfjupaBJzqm4JfgWllumQ/about" target="_blank"><img src="folder_graphics/icons/youtube.svg" alt="Youtube-Logo with profile link." class="img_socialmedias" id="img_socialmedia2"></a>
+    <a href="https://www.instagram.com/_steve_vie/?hl=de" target="_blank"><img src="folder_graphics/icons/instagram.svg" alt="Instagram-Logo with profile link." class="img_socialmedias" id="img_socialmedia3"></a>
+    <a href="https://twitter.com/stevVIEsprotest/" target="_blank"><img src="folder_graphics/icons/twitter-original.svg" alt="Twitter-Logo with profile link." class="img_socialmedias" id="img_socialmedia4"></a>
+    <a href="https://www.linkedin.com/in/stefan-bartl-660556112/" target="_blank"><img src="folder_graphics/icons/linkedin.svg" alt="Linkedin-Logo with profilelink." class="img_socialmedias" id="img_socialmedia5"></a>
+    <a href="https://github.com/StefanBartl" target="_blank"><img src="folder_graphics/icons/github/github-original.svg" alt="Github-Logo with profile link." class="img_socialmedias" id="img_socialmedia6"></a>
+</div>
+</div>
+*/
+/* #endregion */
+
+/* #region socail media links with font awesome*/
+/*
+<div id="div_socialmedia">
+<h3 id="headline_socialmedia">Über die sozialen Medien</h3>
+<div id="wrapper_socialicons">
+    <a href="https://www.facebook.com/barstevie/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+    <a href="https://www.youtube.com/channel/UCVUfjupaBJzqm4JfgWllumQ/about" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+    <a href="https://www.instagram.com/_steve_vie/?hl=de" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+    <a href="https://twitter.com/stevVIEsprotest/" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+    <a href="https://www.linkedin.com/in/stefan-bartl-660556112/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+    <a href="https://github.com/StefanBartl" target="_blank"><i class="fa-brands fa-github"></i></a>
+</div>
+</div>
+*/
+/* #endregion */
+
