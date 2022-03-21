@@ -2,8 +2,7 @@
 ?                                                         my css-coding guideline
 .                                                          =================
 */
-/* umgebung
-?                                                                Umgebung
+/* ?              umgebung
 
 - VS Studio Terminal hilft bei Tippfehler!
 - Auskommentieren CTRL + K + C
@@ -21,8 +20,14 @@ https://developer.chrome.com/docs/devtools/
 - Font Awesome Kit Code: <script src="https://kit.fontawesome.com/1fb3eb29fd.js" crossorigin="anonymous"></script>
 */
 
-/* allgemein
-?                                                                CSS-Allgemein
+/* ?              html
+
+todo  Syntax
+            Mehrere Klassen kann man eingeben indem man ein Leerzeichen einbaut.
+
+*/
+
+/* ?              css-allgemein
 
 todo cross-browser support
         :focus überall wo :hover gesetzt wird
@@ -118,11 +123,11 @@ todo        line-clamp
       https://css-tricks.com/almanac/properties/l/line-clamp/
 */
 
-/* flexbox & grid
-?                                                          Flexbox & Grid
-todo        margin-collapse
-      Sobald flex oder grid attached collapsen die block-margins nicht mehr. Das bedeutet zb.: wenn mehrerer columns nebeneinander sind und dann der screen kleiner wird verdoppeln sich die Abstände!
-      Besser: Margins ganz weglassen und mit Gap arbeiten. Alle flex-items verhalten sich so, auch h, p, usw... haben bei Block margins und verdoppeln sich. 
+/* ?              flexbox & grid
+
+todo  margin-collapse
+            Sobald flex oder grid attached collapsen die block-margins nicht mehr. Das bedeutet zb.: wenn mehrerer columns nebeneinander sind und dann der screen kleiner wird verdoppeln sich die Abstände!
+            Besser: Margins ganz weglassen und mit Gap arbeiten. Alle flex-items verhalten sich so, auch h, p, usw... haben bei Block margins und verdoppeln sich. 
 
  ?                                                          CSS-Grid
       -) grid-template-columns
@@ -132,17 +137,17 @@ https://www.youtube.com/watch?v=qII5BueXWD4
 ?                                                           CSS-Flexbox
 https://www.youtube.com/watch?v=u044iM9xsWU&t=307s
 ! Parents:
-todo        display: flex
-      Gibt den flex-items max-content, macht sie also so groß wie ihr content ist und holt so viele wie es geht in eine line ohne line-nbreaks (Zeilenumbrüche) auszulösen
-      Sollte sich ein Content nicht mehr ausgehen, dann kommt line-break und der container wird nach unten größer.
+todo  display: flex
+            Gibt den flex-items max-content, macht sie also so groß wie ihr content ist und holt so viele wie es geht in eine line ohne line-nbreaks (Zeilenumbrüche) auszulösen
+            Sollte sich ein Content nicht mehr ausgehen, dann kommt line-break und der container wird nach unten größer.
 
-todo        flex-wrap
-      Default: nowrap; Wenn man ihn auf wrap setzt verhindert man den overflow. 
+todo  flex-wrap
+            Default: nowrap; Wenn man ihn auf wrap setzt verhindert man den overflow. 
 
-todo        flex-direction
-      Default: row;  Bedeutet das parent eine row-direction hat und jedes child ein column ist.
-      Wechselt man zu column, ist parent eine column und jedes child eine row.
-      Hervorragend für Media-Queries zu verwenden!
+todo  flex-direction
+            Default: row;  Bedeutet das parent eine row-direction hat und jedes child ein column ist.
+            Wechselt man zu column, ist parent eine column und jedes child eine row.
+            Hervorragend für Media-Queries zu verwenden!
 
 ! Childs:
 todo        flex-basis
@@ -163,8 +168,8 @@ todo        flex
 
 */
 
-/* selektoren
-?                                                             Selektoren
+/* ?              selektoren
+
 -) Wiederholenden Code gruppieren! 
    h1, h3, btn, .Class_X {...}
 
@@ -206,8 +211,7 @@ h1:has(+ p)
 https://developer.mozilla.org/de/docs/Web/CSS/CSS_Selectors
 */
 
-/* pseudoelemente / pseudoklassen
-?                                                        Pseudoelemente
+/* ?              pseudoelemente / pseudoklassen
 
 todo  ::after / ::before 
             für zb.: Punkt -> Strich Animation, Icons über url, pdf files etc...
@@ -220,14 +224,12 @@ todo ::marker
 
 */
 
-/* allgemeines
-?                                                       Allgemeines
+/* ?               tipps & tricks allgemein
 
 - CSS-Background Cliptext einsetzen für "ausdem nichts kommen Effekt"
-- Font Styling
 - Use padding on text! like: padding: 2rem 0;
 - Try get "this is 1 block to read, this is anothe rone,...."
-- No text-align on large texts
+- Nutze cursor: pointer für Buttons & Links sofern es zum Design passt.
 - margin-inline , background-clip background-text-clip 
 - Optimale textlänge mit clamp:    width: clamp(45ch, 50%, 75ch);
 - ch als Eineheit benutzen!
@@ -240,7 +242,19 @@ todo ::marker
 
 todo        sehr schöne cards mit "titel schneidet durch"-effect
 https://www.youtube.com/watch?v=lUaw-AA9HnA&t=607s
-               
+
+*/
+
+/* ?               hover
+
+
+todo        line animation
+      In der Pseudoelement-Klasse kann man mit transform: scaleX(0) das Pseudeolement verschwinden lassen, mit scaleX(1) wieder kommen lassen 
+      und dabei mit transform-origin: left /right einstellen von welcher Richtung die transition kommt. 
+
+todo        hover collection
+https://www.youtube.com/watch?v=ceNMP-aQkQ4
+
 todo         6 hover button outline-effekte 
 https://www.youtube.com/watch?v=3LlLkapKw6Q
 outline + padding erzeugt gerahmten Text, wenn dann :hover, focus {outline-offset: 2px}gesetzt wird erzuegt man einen "wird größer"-Effekt.
@@ -250,10 +264,48 @@ outline + padding erzeugt gerahmten Text, wenn dann :hover, focus {outline-offse
             + wenn jetzt die Outline eine andere Farbe hat als Hintergrund+Border ergibt sich ein neues Effektbild. 
             "Zoom"-Effekt.
             Zweiliniger Rahmen, der nach hover ausgefüllt und verdoppelt wird.
-
 */
 
-/* #region media queries */ /*
+/* ?              font-styling
+
+ todo  font-family
+      garamond: Für alles wo man smart und klugheit vermitteln möchte.  Ist ein alter Stil der aus der mittelalterlichen Zeit abgeleitet ist.
+      @import url("https://use.typekit.net/izw3hmc.css"); or <link rel="stylesheet" href="https://use.typekit.net/izw3hmc.css">
+      font-family: garamond-premier-pro-display,serif;
+      font-weight: 400;
+      font-style: italic;
+      https://fonts.adobe.com/fonts/garamond-premier
+
+      bodoni: Für alles was elegant, "premium" oder "sexy" wirken soll. Hoher kontrast zwischen vertikalen und horizontalen linien.
+      @import url("https://use.typekit.net/izw3hmc.css"); or <link rel="stylesheet" href="https://use.typekit.net/izw3hmc.css">
+      font-family: ltc-bodoni-175,serif;
+      font-weight: 400;
+      font-style: normal;
+
+      century expanded: Für alles was sehr leicht zu lesen soll.
+      
+      futura: Sehr clean, aufgeräumt. Geometrisch.
+      @import url("https://use.typekit.net/izw3hmc.css"); or <link rel="stylesheet" href="https://use.typekit.net/izw3hmc.css">
+      font-family: futura-pt,sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      https://fonts.adobe.com/fonts/futura-pt
+
+      times new roman: Default überall.
+
+      helvetica: Wird auch sehr oft benutzt und ist bei Logos sehr weit verbreitet.
+
+      empfohlen von von "Flux", Designer Massimo Vignelli verwendete nur diese 6:
+      https://www.youtube.com/watch?v=_4cW79vF1mU
+
+      natura: handschrift
+      @import url("https://use.typekit.net/izw3hmc.css"); oder <link rel="stylesheet" href="https://use.typekit.net/izw3hmc.css">
+      font-family: natura,serif;
+      font-weight: 400;
+      font-style: normal;
+*/
+
+/* ?              media queries
 
       Max-Width - Breakpoints mit max-width beginnen mit dem Layout für den größten Monitor, also beim Design für den Desktop 
                   und überschreiben nach und nach Stile, um die Seiten an immer kleinere Displaygrößen anzupassen.
@@ -275,14 +327,13 @@ outline + padding erzeugt gerahmten Text, wenn dann :hover, focus {outline-offse
          Sehr große Endgeräte (Große Bildschirme, iMac, 1200px und größer):
                @media (min-width: 1200px) { … }
 
-  /*#endregion*/ 
-  
+*/ 
+
 /*                                                        ========
 ?                                                          templates
 .                                                          ========
 */
-
-/*#region coloured text animtion */
+/* ?              coloured text animtion
 
 .colouredTextAnimation{
       animation: headlineAnimation 30s infinite alternate-reverse;
@@ -303,9 +354,9 @@ outline + padding erzeugt gerahmten Text, wenn dann :hover, focus {outline-offse
       }
     }
     
-    /*#endregion*/
+*/
     
-/*#region settings menu animations */
+/* ?              settings menu animations
 
 .colourAnimation{
 animation: colouredBoxAnimation infinite alternate-reverse 10s;
@@ -330,9 +381,9 @@ to {
 }
 }
 
-/*#endregion */
+*/
 
-/*#region click-jumping durch dokument mit anker */
+/* ?              click-jumping durch dokument mit anker
 
 html {
   scroll-behavior: smooth;
@@ -344,11 +395,11 @@ section:target {
 section:target b > h2 {
   color: purple;
 }
-/*#endregion*/
 
-/*#region box-hover-line  */
+*/
 
-/*
+/* ?              box-hover-line
+
 .element {
   width: 25rem;
   height: 15rem;
@@ -380,12 +431,11 @@ section:target b > h2 {
 
 HTML:
 <div class="element">Element</div>
-*/
 
-/*#endregion*/ 
+*/ 
 
-/* #region scrollbar design */
-/*                                                                                                                                                                                                                                                                                                        
+/* ?              scrollbar design
+                                                                                                                                                                                                                                                                                                       
       Scrollbar Firefox
             el{
             scrollbar-color: dark;
@@ -400,10 +450,10 @@ HTML:
             ::-webkit-scrollbar-track-piece — the part of the track (progress bar) not covered by the handle.
             ::-webkit-scrollbar-corner — the bottom corner of the scrollbar, where both horizontal and vertical scrollbars meet This is often the bottom-right corner of the browser window.
             ::-webkit-resizer — the draggable resizing handle that appears at the bottom corner of some element
-*/
-/*#endregion*/
 
-/* #region socail media links without font awesome*/
+*/
+
+/* ?              social media links without font awesome
 /*
 <div id="div_socialmedia">
 <h3 id="headline_socialmedia">Über die sozialen Medien</h3>
@@ -416,11 +466,11 @@ HTML:
     <a href="https://github.com/StefanBartl" target="_blank"><img src="folder_graphics/icons/github/github-original.svg" alt="Github-Logo with profile link." class="img_socialmedias" id="img_socialmedia6"></a>
 </div>
 </div>
-*/
-/* #endregion */
 
-/* #region socail media links with font awesome*/
-/*
+*/
+
+/* ?              social media links with font awesome
+
 <div id="div_socialmedia">
 <h3 id="headline_socialmedia">Über die sozialen Medien</h3>
 <div id="wrapper_socialicons">
@@ -432,6 +482,6 @@ HTML:
     <a href="https://github.com/StefanBartl" target="_blank"><i class="fa-brands fa-github"></i></a>
 </div>
 </div>
+
 */
-/* #endregion */
 
