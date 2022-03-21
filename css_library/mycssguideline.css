@@ -118,9 +118,7 @@ todo        z-index
 todo        shape-outside
       Kann Text um etwas herum stylen
 
-todo        line-clamp
-      Damit schneidet man den Text ab wenn das parent-element zu klein wird.
-      https://css-tricks.com/almanac/properties/l/line-clamp/
+
 */
 
 /* ?              flexbox & grid
@@ -266,7 +264,7 @@ outline + padding erzeugt gerahmten Text, wenn dann :hover, focus {outline-offse
             Zweiliniger Rahmen, der nach hover ausgefüllt und verdoppelt wird.
 */
 
-/* ?              font-styling
+/* ?              font familys
 
  todo  font-family
       garamond: Für alles wo man smart und klugheit vermitteln möchte.  Ist ein alter Stil der aus der mittelalterlichen Zeit abgeleitet ist.
@@ -303,6 +301,40 @@ outline + padding erzeugt gerahmten Text, wenn dann :hover, focus {outline-offse
       font-family: natura,serif;
       font-weight: 400;
       font-style: normal;
+*/
+
+/* ?              font / text styling
+
+Als erstes den ganzen Text (h, p,..) in einen Container setzen damit man die Texte gut stylen kann.
+
+todo  text "atmen" lassen: Unbedingt padding und margin nutzen!
+            Bei flex items die nebeneinander sind gap nutzen. 
+            padding und margin nutzen ! nicht block oder inline, sondern zb.: padding: 0 2em; -> Das ist impliziter als andersrum. 
+
+todo  line-lenght
+            Texte die eine sehr lange width haben sind sehr schwer zu lesen. Am besten max-width: 60/70ch oder rem setzen.
+            --text-optimal-width: clamp(45ch, 50%, 75ch);
+
+todo  line-height
+            Zu beginn zb body: line-height 1.5; setzen. Wichtig: Der Abstand wird dann aber sehr groß bei großen Überschriften, deswegen h1, h2, h3: line-height 1.1; setzen!
+
+todo contrast & colour
+            Kontrast ist sehr wichtig für gutze Lesbarkeit: Chrome Kontrast-Tool verwenden!
+            Headings und text sollten sich stark vom Hintergrund abheben, das leitet auch die User besser durch die Page.
+            Dunkelgrauer Text sieht oft sehr gut aus statt schwarzer.
+
+todo kein text-align center bei langen Texten
+            Es macht den Text einfach sehr schwierig zu lesen. Nur bei kleinen Texten nutzen, auch wenn es Design-mäßig vieloleich tbesser aussieht!
+
+todo  custom properties für font sizes nutzen
+            Im CSS-Template-File bereits implementiert. 
+! Alle bisherigen Tipps von "Web design tips for developers": 
+https://www.youtube.com/watch?v=ykn4XNDwW7Q
+
+todo        line-clamp
+      Damit schneidet man den Text ab wenn das parent-element zu klein wird.
+https://css-tricks.com/almanac/properties/l/line-clamp/
+
 */
 
 /* ?              media queries
