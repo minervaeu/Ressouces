@@ -29,6 +29,11 @@ todo  Syntax
 
 /* ?              css-allgemein
 
+todo  wie beginnen
+        Bis auf Imgae-Overflow oder zu lange Texte ist HTML eigentlich responsive. Das bedeutet, dass dein 
+        CSS-Code dazu führt, diese zu brechen! Sei dir dem bewusst! Beginne mit dem Page-Layout und 
+        werde dann immer spezifischer.
+
 todo cross-browser support
         :focus überall wo :hover gesetzt wird
 
@@ -121,6 +126,23 @@ todo        shape-outside
 
 */
 
+/* ?              counquering responsive-layout course 
+
+todo  Prozentwerte statt fixed witdhs
+      Machen den gesamten respnsiven Prozess extrem leichter. Das gilt generell, aber besonders bei widths.
+
+todo  Prozentwerte bei childs
+      Setzt man Fixwerte kann es zu Overflow kommen wenn Parent kleiner wird, deswegen Fixwerte vermeiden.
+      Prozentwerte beziehen sich immer auf die Parent-Box!
+
+todo heights vermeiden
+      Bei Fixwerten kann es dazu kommen, dass der content overflowed sobald die box-width kleiner wird.
+      Braucht man zum Beispiel mehr Background für eine Box, setzt man besser padding.
+
+
+
+*/
+
 /* ?              flexbox & grid
 
 todo  margin-collapse
@@ -163,7 +185,7 @@ todo        flex
       Ist eine shorthand für flex-grow, flex-shrink und flex-basis.
       flex: 1; berechnet für alle items die gleiche Größe und setzt folgende Werte: grow: 1; shrink: 1; basis: 0 (statt auto).
       Setzt man shrink: 0 und basis: 100% will jedes item 100% des parents ausfüllen, weil  nicht erlaubt wurde zu shrinken. Also haben alle items width: 100% !
-
+      Hat man zb 5 li die mehr platz brauchen als die letzten 3, kann mna den ersten 6 flex:3 und den letzen 3 flex: 1 geben!
 */
 
 /* ?              selektoren
@@ -489,14 +511,14 @@ HTML:
 /*
 <div id="div_socialmedia">
 <h3 id="headline_socialmedia">Über die sozialen Medien</h3>
-<div id="wrapper_socialicons">
-    <a href="https://www.facebook.com/barstevie/" target="_blank"><img src="folder_graphics/icons/facebook/facebook-original.svg" alt="Facebook-Logo with profile link." class="img_socialmedias" id="img_socialmedia1"></a>
-    <a href="https://www.youtube.com/channel/UCVUfjupaBJzqm4JfgWllumQ/about" target="_blank"><img src="folder_graphics/icons/youtube.svg" alt="Youtube-Logo with profile link." class="img_socialmedias" id="img_socialmedia2"></a>
-    <a href="https://www.instagram.com/_steve_vie/?hl=de" target="_blank"><img src="folder_graphics/icons/instagram.svg" alt="Instagram-Logo with profile link." class="img_socialmedias" id="img_socialmedia3"></a>
-    <a href="https://twitter.com/stevVIEsprotest/" target="_blank"><img src="folder_graphics/icons/twitter-original.svg" alt="Twitter-Logo with profile link." class="img_socialmedias" id="img_socialmedia4"></a>
-    <a href="https://www.linkedin.com/in/stefan-bartl-660556112/" target="_blank"><img src="folder_graphics/icons/linkedin.svg" alt="Linkedin-Logo with profilelink." class="img_socialmedias" id="img_socialmedia5"></a>
-    <a href="https://github.com/StefanBartl" target="_blank"><img src="folder_graphics/icons/github/github-original.svg" alt="Github-Logo with profile link." class="img_socialmedias" id="img_socialmedia6"></a>
-</div>
+          <div class="wrapper_socialicons">
+              <a href="https://www.facebook.com/barstevie/"><img src="folder_graphics/folder_icons/facebook/facebook-original.svg" alt="Facebook-Logo with profile link." title="My Facebook-Profile." class="img_socialmedias"></a>
+              <a href="https://www.youtube.com/channel/UCVUfjupaBJzqm4JfgWllumQ/about"><img src="folder_graphics/folder_icons/youtube.svg" alt="Youtube-Logo with profile link."  title="My Youtube-Profile."  class="img_socialmedias"></a>
+              <a href="https://www.instagram.com/_steve_vie/?hl=de"><img src="folder_graphics/folder_icons/instagram.svg" alt="Instagram-Logo with profile link."  title="My Instagram-Profile."  class="img_socialmedias"></a>
+              <a href="https://twitter.com/stevVIEsprotest/"><img src="folder_graphics/folder_icons/twitter-original.svg" alt="Twitter-Logo with profile link."  title="My Twitter-Profile." class="img_socialmedias"></a>
+              <a href="https://www.linkedin.com/in/stefan-bartl-660556112/"><img src="folder_graphics/folder_icons/linkedin.svg" alt="Linkedin-Logo with profile link."  title="My Linkedin-Profile."  class="img_socialmedias"></a>
+              <a href="https://github.com/StefanBartl"><img src="folder_graphics/folder_icons/github/github-original.svg" alt="Github-Logo with profile link."  title="My Github-Profile." class="img_socialmedias"></a>   
+            </div>
 </div>
 
 */
