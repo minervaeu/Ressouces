@@ -1,0 +1,32 @@
+body {
+  display: flex;
+}
+
+table {
+  border-style: dotted;
+  color: white;
+  background-color: black;
+  font-family:"Courier New", monospace;
+}
+
+table td {
+  text-align: center;
+}
+
+button{
+  background-color: brown;
+  border-color: brown;
+  border-radius: 10px;
+  width: 75px;
+  height: 30px;
+}
+
+button:hover{
+  background-color:cadetblue;
+}
+.playing {
+  border-color: chartreuse;
+  width: 112px;
+  height: 45px;
+  color: aliceblue;
+}

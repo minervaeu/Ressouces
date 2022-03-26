@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="de">
+
+<head>
+    <title>Mein Drumkit</title>
+    <!-- Javascript und CSS Dateieinbindung -->
+    <script type="text/javascript" src="js/script.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- Favicon & AppleTouch-->
+    <link rel="icon" sizes="16x16" href="pics/Logo/protesblog_favicon200x200.ico">
+    <link rel="apple-touch-icon" sizes="120x120" href="pics/Logo/protesblog_120x120.png" />
+    <!-- Metadaten  -->
+    <meta name="author" content="Stefan Bartl">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta charset="UTF-8">
+    <!-- Responsives Menü -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+
+    <img src="pics/dk.png" alt="Naja, ein DrumKit halt..." id="dkimage">
+    <table id="table">
+      <thead id="thead">
+        <tr>
+          <th id="km" colspan="2">Key Mapping</th>
+        </tr>
+      </thead>
+      <tbody id="tbody">
+      <tr>
+        <td><button data-key="67" >C</button></td><td id="tt">Crash</td>
+      </tr>
+      <tr>
+        <td><button data-key="82">R</button></td><td id="tt">Ride</td>
+      </tr>
+      <tr>
+        <td><button data-key="70">F</button></td><td id="tt">Floor Tom</td>
+      </tr>
+      <tr>
+        <td><button data-key="77">M</button></td><td id="tt">Mid Tom</td>
+      </tr>
+      <tr>
+        <td><button data-key="72">H</button></td><td id="tt">High Tom</td>
+      </tr>
+      <tr>
+        <td><button data-key="86">V</button><button data-key="66">B</button></td><td id="tt">Kick</td>
+      </tr>
+      <tr>
+        <td><button data-key="94">J</button></td><td id="tt">Snare</td>
+      </tr>
+      <tr>
+        <td><button data-key="73">I</button></td><td id="tt">Hi-Hat Open</td>
+      </tr>
+      <tr>
+        <td><button data-key="75">K</button></td><td id="tt">Hi-Hat Closed</td>
+      </tr>
+      <tr>
+        <td><button data-key="87">W</button></td><td id="tt">Clap</td>
+      </tr>
+    </tbody>
+    </table>
+
+<audio data-key="67" src="audio/808-cymbal-crash.wav"></audio>
+<audio data-key="87" src="audio/808-clap.wav"></audio>
+<audio data-key="82" src="audio/808-cymbal-ridehm.wav"></audio>
+<audio data-key="86" src="audio/808-kick-1.wav"></audio>
+<audio data-key="70" src="audio/808-tom-floor.wav"></audio>
+<audio data-key="72" src="audio/808-tom-high.wav"></audio>
+<audio data-key="77" src="audio/808-tom-mid.wav"></audio>
+<audio data-key="66" src="audio/vinyl-kick-2.wav"></audio>
+<audio data-key="75" src="audio/vinyl-hat-closed.wav"></audio>
+<audio data-key="73" src="audio/vinyl-hat-open.wav"></audio>
+<audio data-key="94" src="audio/vinyl-snare-02.wav"></audio>
+
+  <script>
+  window.addEventListener('keydown', function (e){
+const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+const buttons = document.querySelector(`button[data-key="${e.keyCode}"]`);
+
+if (!audio) return;
+audio.currentTime = 0;
+audio.play();
+buttons.classList.add('playing');
+const remove = () => {buttons.classList.remove('playing')};
+setTimeout(remove, 100);
+})
+
+
+
+  </script>
+
+
+</body>
+
+</html>

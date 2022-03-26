@@ -1,0 +1,18 @@
+{
+    "cmake.configureOnOpen": true,
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MariaDB",
+            "name": "XammpWKDSQL",
+            "username": "Wickedsteve",
+            "password": "020290Ab",
+            "database": "Wickedsteve"
+        }
+    ]
+}
