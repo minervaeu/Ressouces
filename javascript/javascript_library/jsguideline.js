@@ -41,7 +41,13 @@
 
 - Variablen in return: return `(${variable})`
 
-?           Tipps & Tricks
+
+*/
+
+/*  Tipps & Tricks
+
+todo    arrays in 3localstorage speichern
+    mit stringify & parse
 
 todo    label für loops
     Man kann loops Labels geben um gezielt break und continue auf sie zu verwenden. Damit kann man die for variablen direkt inkrementieren!
