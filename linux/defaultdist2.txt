@@ -55,6 +55,7 @@ busybox-initramfs
 busybox-static
 bzip2
 ca-certificates
+cargo
 cheese-common
 chromium-codecs-ffmpeg-extra
 cmake
@@ -359,6 +360,7 @@ gnupg-l10n
 gnupg-utils
 gnuradio
 gnuradio-dev:amd64
+google-chrome-stable
 google-chrome-unstable
 gpg
 gpg-agent
@@ -1159,8 +1161,11 @@ libsratom-0-0:amd64
 libss2:amd64
 libssh-4:amd64
 libssh-gcrypt-4:amd64
+libssh2-1:amd64
 libssl1.1:amd64
 libstartup-notification0:amd64
+libstd-rust-1.57:amd64
+libstd-rust-dev:amd64
 libstdc++-9-dev:amd64
 libstdc++6:amd64
 libstdc++6:i386
@@ -1598,6 +1603,7 @@ rsync
 rsyslog
 rtkit
 rtl-sdr
+rustc
 rygel
 samba-libs:amd64
 sane-utils
