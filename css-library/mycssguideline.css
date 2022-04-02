@@ -393,6 +393,19 @@ Dreht sich um die eigene Achse:
 
 }
 
+
+fliegt von link oben in Bogen nach unten und rechts und steht dann normal da:
+el {
+transform-style: preserve-3d;
+transform-origin: 0 0 0
+animation: leftright 10s infinite linear 
+}
+  @keyframes leftright {
+    50% { transform: translateZ(-10px) rotateX(60deg) rotateZ(29deg) rotateY(-180deg); }
+} 
+
+
+
 */
 
 /* ?              media queries
