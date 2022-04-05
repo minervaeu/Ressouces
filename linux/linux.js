@@ -51,6 +51,19 @@ Install software from a text file:
 Further Detail
 After reinstalling your base Linux system, copy or upload a copy of the ‘allthethings.txt’ file to your system. Please ensure you have installed the same version of your OS on your new or remote system. Once the file has been copied, install the packages from the allthethings.txt file using one of the above noted commands as the root user. The package manager will install all of the packages listed in the ‘allthethings.txt’ file on your system.
 --> https://www.liquidweb.com/kb/how-to-create-a-software-install-list/
+
+
+How to delete OS from boot menu
+
+The menu to which you refer is the firmware's built-in boot manager. Its entries are stored in NVRAM, and can be edited by any number of tools in various environments:
+
+    Some EFIs provide a means to do this via their setup utility. Details vary from one system to another, though, and many don't permit you to add or delete boot manager entries.
+    The EFI version 2 shell provides a command called bcfg that can do the job. You'd need to do bcfg boot dump -b to see the entries, then bcfg boot rm # to delete entry number # -- # must be the number associated with whatever entry you want to remove. For example, if the entry is Boot0002 Fedora, then # is 2.
+    In Linux, efibootmgr can do the job: Type efibootmgr or efibootmgr -v to see the entries, then do efibootmgr -b # -B to delete entry #. (You must type these commands as root or using sudo.)
+    In Windows, the EasyUEFI tool should be able to handle the job, although I've only toyed with it briefly, so I can't give detailed instructions.
+
+Be aware that in any of these cases, you may have leftover files on your EFI System Partition (ESP). You can delete them through normal file-manipulation commands, although depending on your OS, you may need to explicitly mount the ESP. If they aren't referenced, the files won't do any real harm, unless they consume so much space that they prevent you from installing another OS or updating your boot manager. The files will normally be stored in subdirectories of the EFI directory on the ESP; most OSes create subdirectories named after themselves or the companies that create them, such as EFI/ubuntu for Ubuntu or EFI/Microsoft for Windows.
+
 */
 
 
