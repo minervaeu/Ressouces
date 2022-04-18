@@ -21,7 +21,8 @@
                                       - Create new DOM Element                                                                                                                                      
                                       - Set attributes for Element                                                                                                                                   
                                       - Set attributes for Elements                                                                                                                                 
-                                      - Fireworks                    
+                                      - Fireworks       
+                                      - openNewTab             
                                                        
 ?                  Javascript - what a wonderful language!
 */
@@ -748,6 +749,16 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 });
 };
+
+/* =====================
+!     Open a new Tab
+        ====================== */
+function openInNewTab(href) {
+    Object.assign(document.createElement('a'), {
+      target: '_blank',
+      href: href,
+    }).click();
+  }
 
 //#region Callback, Promises, Async/Await
 
