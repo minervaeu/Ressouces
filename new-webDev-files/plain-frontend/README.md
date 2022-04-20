@@ -113,4 +113,4 @@ Auch ein großes und herzliches Dankeschön an alle meine Freunde und Familie f�
 
 ​				April 2022
 
-Liebevolle Wissenschaft, Technik & Frieden!
+Liebe Wissenschaft, Technik & Frieden!
