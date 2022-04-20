@@ -62,4 +62,10 @@ todo    console
 todo document.querySelector() 
     selektiert auch nach CSS Regeln wie: let test = document.querySelector("a:has(> img)");
 
+todo measure user scrolling state
+window.addEventListener("scroll", ()=>{
+const scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+console.log(scrollTop);
+})
+
  */
