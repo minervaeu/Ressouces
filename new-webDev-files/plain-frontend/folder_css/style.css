@@ -73,6 +73,7 @@ todo                CSS - What a wonderful & tricky language !                  
   --wkd-grapefruit: rgb(239, 95, 87);
   --wkd-pink: rgb(255, 0, 128);
   --wkd-pinkviolett: rgb(255, 0, 255);  /* filter: brightness(0) saturate(100%) invert(19%) sepia(63%) saturate(4179%) hue-rotate(293deg) brightness(123%) contrast(136%); */
+  --wkd-darkviolett: rgb(102, 0, 102); 
   --wkd-manner: rgb(235, 184, 173);
 }
 
