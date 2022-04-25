@@ -1,5 +1,7 @@
 # Ressources
 
+This is my Repository, where i store all things which belong to my Web-Development-Projects.
+
 # === Special credits to ===
 
 The Odin Project - the place where i used to learn Web Development: 
@@ -43,8 +45,6 @@ Also a big and heartfelt thank you to all my friends and family for the support 
 
 === Feel embraced! ===
 
-​		
-
 ​					Stefan Bartl
 
 ​		(WKDSteve or WKDMinerva)
@@ -55,4 +55,4 @@ Also a big and heartfelt thank you to all my friends and family for the support 
 
 ​	Loving Science, Tech & Peace !
 
-============================================================================================================================
+=======================================================================================
