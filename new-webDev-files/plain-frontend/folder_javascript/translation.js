@@ -8,7 +8,6 @@ document.querySelector(".navlist-language").innerText === "english"
     : (localStorage.language = "de");
 // than invoke translation of page
 general_translation(localStorage.language);
-home_translation(localStorage.language);
 //console.log(`Language setted to ${localStorage.language}.`);
 });
 
