@@ -850,7 +850,7 @@ testAwait().then((data) => {console.log(data);});
 
 //#region Create CSS-Class and apply it to Element
 /* =============
-!     Craete CSS-Class
+!     Create CSS-Class
             ============= */
 function createClass(name,rules){
     var style = document.createElement("style");
