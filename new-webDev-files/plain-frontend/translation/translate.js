@@ -1,12 +1,21 @@
-const languageText = document.querySelector(".language-text");
+ const languageText = document.querySelector(".language-text");
 
 //#region Language / Translation
 
 // ? Setup Translation 
 // get setted language from local storage or browser language and store it there
 const language = localStorage.language || navigator.language;
-// This is not the best way, regexp would be better to proof of 'de'
-language[0] === "d" && language[1] === "e" ? localStorage.language = "de" : "en";
+
+// RegEx to test for German language
+const langRegExDE = /de/ig; 
+
+// Test for german browser language against the getted browser language and set language
+langRegExDE.test(browserLanguagePattern) 
+  ? localStorage.setItem("Language", "de") 
+  : localStorage.setItem("Language", "en") 
+
+//  !This is not the best way, regexp would be better to proof of 'de'
+//  !language[0] === "d" && language[1] === "e" ? localStorage.language = "de" : "en";
 
 
 // ? English Library
