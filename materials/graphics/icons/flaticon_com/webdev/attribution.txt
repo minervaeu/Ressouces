@@ -1,0 +1,2 @@
+arrow-right.png : https://www.flaticon.com/authors/deemakdaksina
+next.png : https://www.flaticon.com/authors/smashicons

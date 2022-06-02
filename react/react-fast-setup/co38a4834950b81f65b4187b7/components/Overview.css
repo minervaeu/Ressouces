@@ -1,0 +1,9 @@
+.Overview{
+    display: flex;
+    flex-direction: column;
+}
+
+.Overview h1 {
+    color: var(--wkd-orange);
+    text-align: center;
+  }
