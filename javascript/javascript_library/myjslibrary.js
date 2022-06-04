@@ -9,7 +9,9 @@
 !                                        Table of content              
 
 ?                                 my generic-javascript library                                  
-                                                                                            
+                                                              
+                                      - Toggle 90deg animation by element 
+                                      - Toogle fullscreen mode for elements
                                       - Returns sum 
                                       - Insert Element before reference Node
                                       - Insert Element after reference Node                                                                                                                            
@@ -31,7 +33,7 @@
 //#region my generic-javascript library
 
 /* ========================
-!    toggle 90deg animation by element 
+!    Toggle 90deg animation by element 
 ========================== */
 function toggle90degAnimation (element) {
 
@@ -74,6 +76,35 @@ function toggle90degAnimation (element) {
 
 };
 
+/* ========================
+!    Toogle fullscreen mode for elements
+========================== */
+function toggleFullscreen(elem) {
+    elem = elem || document.documentElement;
+  
+    if (!document.fullscreenElement && !document.mozFullScreenElement &&
+      !document.webkitFullscreenElement && !document.msFullscreenElement) {
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen();
+      } else if (elem.mozRequestFullScreen) {
+        elem.mozRequestFullScreen();
+      } else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+      }
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      }
+    }
+ };
 
 /* ========================
 !    returns sum of given arguments
