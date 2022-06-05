@@ -104,6 +104,18 @@ function toggleFullscreen(elem) {
         document.webkitExitFullscreen();
       }
     }
+
+    // ?  Function to check status if Browser is currently in fullscreen mode
+    function toggleFullScreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        }
+        }
+    };
+
  };
 
 /* ========================
