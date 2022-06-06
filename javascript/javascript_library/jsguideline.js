@@ -1,6 +1,6 @@
-/*
+//#region  Checklist:
 
-?                                         Checklist:
+/*                                      
 
 - insomnia.rest hilft beimn api schreiben!
 
@@ -44,8 +44,12 @@
 
 */
 
-/*  Tipps & Tricks
+//#endregion
 
+
+//#region Tipps & Tricks
+
+/*
 todo    arrays in 3localstorage speichern
     mit stringify & parse
 
@@ -67,5 +71,97 @@ window.addEventListener("scroll", ()=>{
 const scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
 console.log(scrollTop);
 })
+*/
 
- */
+//#endregion
+
+
+//#region  asynchronus javascript
+
+//            ? |==================================|
+//            ?  ==== callbacks, promises & async/await ==== 
+//            ? |==================================|
+
+/* =======
+!   Callback
+            =======*/
+// Standard Callback function
+function myCallback(name, callback) {
+    // name = "Setting Parameters here overwrites arguments in invoking! (Scope)";
+    // After 1 second the callback function gets invoked, which in this examle creates a Object username with either the 1 argument by invoking or the name in this function
+    setTimeout(() => {
+    callback({ username: name });
+    }, 1000);
+    // Second argument  have acces to the callback function, so acces to the Object where username: name. With that variables you can work. (.then)
+//const myName = myCallback("Steve", (username) => {
+// console.log(username);
+//});
+};
+
+/* ======
+!     Promise
+            ======*/
+// Standard Promise
+const myPromise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+    resolve({ var: "My Test" });
+    }, 2000);
+
+    //myPromise
+//  .then(myTest => {console.log(myTest)} );
+});
+
+// Get values from multiple Promises at the same time
+const myPromise2 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+    resolve({ var: "+ my second Test in Promise.all!" });
+    }, 2000);
+    //? You have to pass an array!
+//Promise.all([myPromise, myPromise2])
+//  .then(result => {console.log(result)});
+
+});
+
+/* ==========
+!     Async / Await
+            ===========*/
+// Get functions which return a promise
+function firstPromise() {
+    return new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve({ var: "Code after 3 seconds" });
+    }, 3000);
+    });
+}
+
+function secondPromise() {
+    return new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve({ var: "Code after 4 seconds" });
+    }, 4000);
+    });
+}
+
+// Async / Await can handle those fuinctions
+async function result() {
+    const first = await firstPromise();
+    const second = await secondPromise();
+    console.log(first, second);
+}
+//result();
+
+/* ===============
+!     Await with Promises
+            =============== */
+const testAwait = function AwaitPromise() {
+    const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve("Inside test await");
+    }, 2000);
+    });
+    return promise;
+};
+/*
+testAwait().then((data) => {console.log(data);});
+*/
+//#endregion
