@@ -1,2 +1,8 @@
-arrow-right.png : https://www.flaticon.com/authors/deemakdaksina
+arrow-right.png : https://www.flaticon.com/authors/deemakdaksina <a href="https://www.flaticon.com/free-icons/arrow" title="arrow icons">Arrow icons created by deemakdaksina - Flaticon</a>
 next.png : https://www.flaticon.com/authors/smashicons
+add: "https://www.flaticon.com/free-icons/add" <a href="https://www.flaticon.com/free-icons/add" title="add icons">Add icons created by Ilham Fitrotul Hayat - Flaticon</a>
+fire-truck: "https://www.flaticon.com/free-icons/fire-truck  <a href="https://www.flaticon.com/free-icons/fireman" title="fireman icons">Fireman icons created by Freepik - Flaticon</a>
+fire-extinguisher: "https://www.flaticon.com/free-icons/fire-extinguisher" <a href="https://www.flaticon.com/free-icons/fire-extinguisher" title="fire extinguisher icons">Fire extinguisher icons created by BZZRINCANTATION - Flaticon</a>
+
+
+<a href="https://www.flaticon.com/free-icons/fire-truck" title="fire truck icons">Fire truck icons created by Freepik - Flaticon</a>
