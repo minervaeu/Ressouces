@@ -2,12 +2,14 @@ Odin Projekte:
 überarbeiten....
  wie Library an Firebase einbinden
 
+Webpack
 Redux
 Routes
 Context API
 Typescript
 Javascript Buch nochmal durchblättern
 Git
+Chrome V8 Javascript Engine in detail
 
 C
 C++
