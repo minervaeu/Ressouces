@@ -2,14 +2,20 @@ Odin Projekte:
 überarbeiten....
  wie Library an Firebase einbinden
 
+Top level await (Datein die über script typr mit type module angegeben also ECMACript module, 
+in node.js mit modulen die in der package.json mit type module eingetragen sind oder in node.js in dateien mit .mjs )
+
 Webpack
 Redux
 Routes
 Context API
+NEXT.js
+Redwood
 Typescript
 Javascript Buch nochmal durchblättern
 Git
-Chrome V8 Javascript Engine in detail
+JS Library
+RegExp
 
 C
 C++
@@ -17,3 +23,4 @@ C#
 Python
 Server
 Unity
+firebase firestore
