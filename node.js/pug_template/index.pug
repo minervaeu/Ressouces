@@ -1,24 +1,5 @@
-Doctype html
-html 
-    head
-        meta(charset="UTF-8")
-        meta(name="viewport" content="width=device-width, initial-scale=1")
-        meta(name="author" content="Stefan Bartl ????")
-        meta(name="description" content="Web Page from WKD")
-        meta(name="keywords" content="web-page  WKDSteve, javascript")
-        link(rel="stylesheet" type="text/css" href="")
-        link(rel="icon" sizes="16x16" href="")
-        title Page title
-    body
-        block blockname 
-            //header.header
-            //nav.navbar
-                ul
-                    each i in ['Home', 'About']
-                        li=i
-            //section.section_1 
-            main.main
-                .main_wrapper 
-            //section.section_2
-            //footer.footer
-        //script(type="text/javascript" src="") 
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
