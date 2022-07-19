@@ -1,0 +1,59 @@
+install pug cli (globally):
+npm i pug-cli -g
+
+pug with watch flag to root directory, render to ./html file and pretty printed:
+pug -w ./ -o ./html -P
+
+Syntax:
+
+Serving values via express => 
+pug: #{name}
+// Compile the source code
+const compiledFunction = pug.compileFile('template.pug');
+// Render a set of data
+console.log(compiledFunction({
+  name: 'Timothy'
+}));
+
+
+!! prepend, append or overwriting a block is possible !!
+
+inlude pug files => include root/path
+. | # => class | id
+arrays => - const arr = []
+objects => - const obj = {}
+
+div&attributes(class=myArr) creates div with classes from array 
+div&attributes(myObj) creates a div with given properties
+
+internal css => .style 
+                        p{...} 
+or
+p(style="....")
+or
+via array &attributes(style=Array)
+
+emphatize =>   strong My sentence | em 
+with pipe | writing in next line or whitespace is possible
+
+for each loop:
+each n in [1, 2, 3]
+    p=n (numbers)
+    p .... (for 3 lines)
+each n, i in [1, 2, 3]
+    p= n (value) i (index)
+
+const myArr = ["hall", "huhu",...] 
+    each n in myArr
+
+const myObj = [1:"hall", 2: "huhu",...] 
+    each n, i in myObj (for acces properties)
+
+switch:
+case friends
+  when 0
+    - break
+  when 1
+    p you have very few friends
+  default
+    p you have #{friends} friends
