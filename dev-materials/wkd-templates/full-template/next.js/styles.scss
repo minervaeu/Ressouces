@@ -1,0 +1,86 @@
+/* futura: font-family: futura-pt,sans-serif; */
+@import url("https://use.typekit.net/izw3hmc.css");
+
+/* general variables */
+  $font-futura: futura-pt,sans-serif;
+  $fs-400: 1rem;
+  $fs-500: 1.125rem;
+  $fs-600: 1.375rem;
+  $fs-700: 2rem;
+  $text-optimal-width: clamp(45ch, 50%, 75ch);
+
+.container { 
+
+  min-height: 100vh;
+  line-height: 1.5;
+  padding: 0 2rem;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  font-family: $font-futura;
+  font-weight: 400;
+  font-style: normal; 
+
+  > *,
+  > *::before,
+  > *::after {
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box; /* Firefox, other Gecko */
+    box-sizing: border-box; /* Opera/IE 8+ */
+  }
+
+  > body,
+  > h1,
+  > h2,
+  > h3,
+  > h4,
+  > h5,
+  > h6,
+  > figure,
+  > picture {
+    margin: 0;
+  }
+
+  /* make images easier to work with */
+  > img,
+  > picture {
+    max-width: 100%;
+    display: block;
+  }
+
+  /* make form elements easier to work with */
+  > input,
+  > button,
+  > textarea,
+  > select {
+    font: inherit;
+  }
+
+  /* remove animations for people who turned them off*/
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+}
+
+.main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer {
+  justify-content: center;
+  align-items: center;
+}
+
+
+
