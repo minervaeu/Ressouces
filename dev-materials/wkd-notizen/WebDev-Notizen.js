@@ -323,9 +323,16 @@ All textual <input>, <textarea>, and <select> elements with the class .form-cont
 //? =============== React ================
 /*
 
+todo GET Bootstrap-Icons
+
+npm install bootstrap-icons
+And add to index.js =>
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 
 todo Combine React and Node.js/Express
+https://rapidapi.com/blog/create-react-app-express/#:~:text=But%20if%20you%20just%20remember,that%20contain%20your%20React%20app.
+
 import './App.css';
 import React from 'react';
 
@@ -367,7 +374,8 @@ function App() {
 
 export default App;
 
-
+cLient package.json:
+"proxy": "http://localhost:3001",
 
 */
 
@@ -436,6 +444,18 @@ package.json:
     "build": "npx tsc",
     "start": "node dist/index.js",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\""
+
+todo use .env in package.json
+https://stackoverflow.com/questions/34650527/how-to-use-environment-variables-in-package-json
+
+In case you use .env file, let's use grep or eval to get a value environment variable from the .env file.
+
+Updated start2 as @Paul suggested:
+
+"scripts": {
+    "start": "NODE_ENV=$(grep NODE_ENV .env | cut -d '=' -f2) some_script",
+    "start2": "eval $(grep '^NODE_ENV' .env) && some_script"
+}
 
  */
 
