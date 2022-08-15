@@ -390,7 +390,7 @@ sass:
     "sass": "sass -w ./styles/styles.scss:./styles/style.module.css",
 
 
-Bootstrap-Einbindung
+todo Bootstrap-Einbindung
 _app.tsx:
 import Head from "next/head";
 import Script from "next/script"
@@ -411,6 +411,12 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
 
 export default MyApp
+
+todo Bootstrap-Icons 
+_app.js:
+import 'bootstrap-icons/font/bootstrap-icons.css'
+
+
 
 
 //? =============== React ==========
