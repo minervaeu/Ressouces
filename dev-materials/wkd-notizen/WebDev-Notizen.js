@@ -417,6 +417,57 @@ _app.js:
 import 'bootstrap-icons/font/bootstrap-icons.css'
 
 
+todo Mongo DB
+
+===>> Immer im API fetchen!
+
+? const MongoClient = require('mongodb').MongoClient;
+ODER 
+? import User from '../../models/user';
+? import mongoose from 'mongoose';
+
+export default function MongoDB (req, res) {
+  
+todo Mongo Client
+  MongoClient.connect(process.env.NEXT_PUBLIC_MONGODB_URI || 'mongodb+srv://wkdsteve:020290Ab@freiraum.xvduccp.mongodb.net/FREIraum?retryWrites=true&w=majority', async (err, client) => {
+    if (err) { throw new Error(err) }
+    console.log('Connection succesfull')
+    
+    var db = client.db("FREIraum");
+
+        db.collection('Alpha')
+          .findOne({username: 'WKDTEST'}, (err, data) => {
+            if(err)console.log(err);  
+            console.log(data);
+            }
+          );
+
+    console.log('Callback end, closing client now...')
+    client.close();
+    });
+
+
+todo MONGOOSE
+
+  try {
+    mongoose.connect(process.env.NEXT_PUBLIC_MONGODB_URI || 'mongodb+srv://wkdsteve:020290Ab@freiraum.xvduccp.mongodb.net/FREIraum?retryWrites=true&w=majority'
+    , () =>{
+      console.log("connected")
+      const db = mongoose.connection;
+      User.find({username: 'WKDTEST'})
+          .exec((err, data) => {
+              if(err)return console.log(err);
+              console.log(data);
+              res.json({1: data.password})
+        });
+    });
+  } catch (error) {
+    console.log("could not connect");
+    console.log(error);
+  };
+
+}
+
 
 
 //? =============== React ==========
@@ -855,15 +906,13 @@ export default class Message{
 
 
 //? =============== MongoDB  =============
-
-
 //#region Mongo DB Client
 
 const MongoClient = require('mongodb').MongoClient;
 
 async function DBClient (callback) {
 
-  MongoClient.connect(process.env['MONGODB'], async (err, client) => {
+  MongoClient.connect(process.env['MONGO_URI'], async (err, client) => {
     if (err) { throw new Error(err) }
     console.log('Connection succesfull, awaiting callback...')
     await callback(client);
@@ -879,8 +928,11 @@ module.exports = DBClient;
 //#endregion
 
 
-//#region Mongoose
 
+//? =============== Mongoose  =============
+//#region
+
+// ?    =================================================
 //#region Queries
 
 // Find Querie
@@ -909,7 +961,6 @@ for (const key of Model.property.keys()) {
   }
 
 //#endregion
-
 
 
 
