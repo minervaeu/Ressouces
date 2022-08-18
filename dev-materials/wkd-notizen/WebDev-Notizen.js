@@ -435,7 +435,7 @@ todo Mongo Client
     
     var db = client.db("FREIraum");
 
-        db.collection('Alpha')
+        await db.collection('Alpha')
           .findOne({username: 'WKDTEST'}, (err, data) => {
             if(err)console.log(err);  
             console.log(data);
