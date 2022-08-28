@@ -2,6 +2,205 @@
 
 
 
+//? =============== Typescript  ==========
+//#region 
+/*
+
+Keynotes:
+Types und Interfaces in eigene Datei auslagern.
+
+todo  ==== Installiern & Kompilieren ==== 
+
+node:
+sudo npm install -g typescript 
+    option: npm install -D tslint@5.12.1
+
+Für express:
+sudo ts-node => compile ts code in node
+npm i --save-dev @types/body-parser @types/express @types/mongoose @types/jquery @types/bootstrap
+
+todo tsconfig.json
+    tsc --init
+oder
+{
+    "compilerOptions": {
+      "module": "commonjs",
+      "esModuleInterop": true,
+      "strict": true,
+      "skipLibCheck": true,
+      "target": "es6",
+      "strict": true; //?  zb muss bei Argumentübergabe null/undefined explizit angegebenen werden wenn man es möchte 
+      "moduleResolution": "node",
+      "sourceMap": true,
+      "allowJs": true,
+      "outDir": "./dist"
+    },
+    "lib": ["es2015"],
+    "include": [
+        "index.ts",
+        "./src/** /*"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+  }
+module: Gibt die Methode zur Erzeugung des Modulcodes an. Node verwendet commonjs.
+target: Gibt das Ausgabe-Sprachniveau an.
+moduleResolution: Dies hilft dem Compiler herauszufinden, worauf sich ein Import bezieht. Der Wert node imitiert den Mechanismus zur Auflösung des Node-Moduls.
+
+todo ES6 Modules 
+  import * as .....
+
+todo package.json
+    "build": "tsc --w",
+    "start": "tsc && ts-node ./dist/index.js"
+
+option: npm install -D concurrently nodemon
+    "build": "npx tsc",
+    "start": "node dist/index.js",
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\""
+
+
+The build command will compile the code in JavaScript inside a dist directory. 
+The dev command is used to run the Node.js server in development mode.
+Now, go back to the terminal window and run 
+npm run dev 
+to trigger the development server
+If changes, run
+npm run build
+
+./node_modules/.bin/tslint --init       Zum erzeugen der lint datei
+tslint.json-Datei und Regel no-console hinzufügen
+{
+  "defaultSeverity": "error",
+  "extends": ["tslint:recommended"],
+  "jsRules": {},
+  "rules": {
+    "no-console": false
+  },
+  "rulesDirectory": []
+}
+package.json:
+    "start": "tsc && node dist/app.js",
+
+
+tsc oder 
+tsc "Dateiname"
+
+Build:
+Terminal -> Default Build konfigurieren
+strg+shift+b
+
+todo  ==== Types ==== 
+
+Type assertion:
+var test: any;
+test = 2; // typeof number
+test = "ik";c // typeof string
+test = []; // typeof array
+? ==> z.B.: String-Methoden bei "type: any"-Variablen nur über Type-Assertion:
+var nok = (test as string).toLowerCase(); 
+var ok = (<string>test).toLowerCase()
+
+enums are consts
+    export enum Settings {
+        user = "Ich",
+        admin = true
+    }
+    import { Settings } from....
+    Settings.user
+
+todo Init & Declaration 
+const data: string = "Here is my string";
+let simpleArray: number[] = [4, 2, 0];
+const schema: ANY = {
+    prop1: ....
+}
+
+todo  ==== Funktionen ==== 
+
+Parameter typisieren und default:
+function add(value1: number, value2: any, valueDefaultisiert: number = 1, ....){};
+
+
+todo  ==== Klassen ==== 
+
+private / public statt this im lustruktor
+class Fahrzeug{
+    
+    constructor(private/public name: string){
+        statt this.name = name;
+    }
+}
+
+Static => eine Variable oder Methode, die bei allen Subklassen gleich ist
+
+class Fahrzeug{
+    
+    static Fahrzeug.count: number; ==> count ist bei allen subklassen trotz Erhöhung in ihnen gleich
+
+    constructor(private name: string){
+        Fahrzeug.count++; ==> in jeder subklasse wird count erhöht
+    }
+
+}
+
+todo  ==== Interface ==== 
+
+Interface definiert ein Objekt, types alles andere
+
+Example:
+
+? ==> Definieren der Datentypen
+    interface Name {
+        firstName: string;
+    }
+
+? ==> Definieren, wie die Daten aus den Interface verarbeitet werden 
+    const nameCreator = (name: Name): string {
+        return  `Hello, ${name.firstName}`
+    };
+
+? Daten initialisiern
+    let myName = {firstName: "Steve"};
+
+? Interface verwenden
+    console.log(nameCreator(myName))
+
+
+todo  ==== Generic ==== 
+
+Example:
+
+? ==> Generic (T is 'open for type interpretation')
+    function nameCreator<T>(name: T): T {
+        return  name
+    };
+
+? Daten initialisiern
+    let myName= nameCreator<string>('WKD');
+    or
+    let myName= nameCreator<number>(2);
+
+
+todo  ==== Decorators ==== 
+
+function Dummy(){....};
+
+@Dummy              ==> Now the function is available in the class Message
+export default class Message{
+    name;
+    constructor(name){
+        this,name = name;
+    }
+}
+
+
+*/
+//#endregion
+
+
+
 //? =============== CSS ==================
 /*
                        radius   mittelpunkt
@@ -28,20 +227,24 @@ npm install -g sass
 compile with watcher:
 sass -w style.scss:style.css
 
+todo node-sass compile Sass dir into CSS-Dir
+    "sass-w": "node-sass -w styles/sass -o styles",
+
+
 todo compile all files to 1 and watch
-"sass-w": "sass -w src/sass/styles.scss:src/stylesheet/styles.css", 
-                   here are all. scss files || this is the compiled css
-IMPORTANT in the styles.scss you must import all other scss files! like =>
-@import 'index';
-@import 'app';
-@import 'test'
+    "sass-w": "sass -w src/sass/styles.scss:src/stylesheet/styles.css", 
+                    here are all. scss files || this is the compiled css
+    IMPORTANT in the styles.scss you must import all other scss files! like =>
+    @import 'index';
+    @import 'app';
+    @import 'test'
 
 
-(GUI f.e. Prepros)
+    (GUI f.e. Prepros)
 
-node-sass
-    "sass": "node-sass public/stylesheets/style.scss public/stylesheets/style.css",
-    "sass-w": "node-sass -w -r public/stylesheets/style.scss public/stylesheets/style.css",
+    node-sass
+        "sass": "node-sass public/stylesheets/style.scss public/stylesheets/style.css",
+        "sass-w": "node-sass -w -r public/stylesheets/style.scss public/stylesheets/style.css",
 
 todo  ==== ALLGEMEIN ====
 
@@ -517,6 +720,7 @@ Updated start2 as @Paul suggested:
  */
 
 
+
 //? =============== GIT & Github =========
 //#region 
 /*
@@ -706,205 +910,6 @@ jq user intrface tooltip
 countdown
 Landkate mit leaflet
 navigator.geolocation.getCurrentPosition() für gps
-
-
-*/
-//#endregion
-
-
-
-//? =============== Typescript  ==========
-//#region 
-/*
-
-Keynotes:
-Types und Interfaces in eigene Datei auslagern.
-
-todo  ==== Installiern & Kompilieren ==== 
-
-node:
-sudo npm install -g typescript 
-    option: npm install -D tslint@5.12.1
-
-Für express:
-sudo ts-node => compile ts code in node
-npm i --save-dev @types/body-parser @types/express @types/mongoose @types/jquery @types/bootstrap
-
-todo tsconfig.json
-    tsc --init
-oder
-{
-    "compilerOptions": {
-      "module": "commonjs",
-      "esModuleInterop": true,
-      "strict": true,
-      "skipLibCheck": true,
-      "target": "es6",
-      "strict": true; //?  zb muss bei Argumentübergabe null/undefined explizit angegebenen werden wenn man es möchte 
-      "moduleResolution": "node",
-      "sourceMap": true,
-      "allowJs": true,
-      "outDir": "./dist"
-    },
-    "lib": ["es2015"],
-    "include": [
-        "index.ts",
-        "./src/** /*"
-    ],
-    "exclude": [
-        "node_modules"
-    ]
-  }
-module: Gibt die Methode zur Erzeugung des Modulcodes an. Node verwendet commonjs.
-target: Gibt das Ausgabe-Sprachniveau an.
-moduleResolution: Dies hilft dem Compiler herauszufinden, worauf sich ein Import bezieht. Der Wert node imitiert den Mechanismus zur Auflösung des Node-Moduls.
-
-todo ES6 Modules 
-  import * as .....
-
-todo package.json
-    "build": "tsc --w",
-    "start": "tsc && ts-node ./dist/index.js"
-
-option: npm install -D concurrently nodemon
-    "build": "npx tsc",
-    "start": "node dist/index.js",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\""
-
-
-The build command will compile the code in JavaScript inside a dist directory. 
-The dev command is used to run the Node.js server in development mode.
-Now, go back to the terminal window and run 
-npm run dev 
-to trigger the development server
-If changes, run
-npm run build
-
-./node_modules/.bin/tslint --init       Zum erzeugen der lint datei
-tslint.json-Datei und Regel no-console hinzufügen
-{
-  "defaultSeverity": "error",
-  "extends": ["tslint:recommended"],
-  "jsRules": {},
-  "rules": {
-    "no-console": false
-  },
-  "rulesDirectory": []
-}
-package.json:
-    "start": "tsc && node dist/app.js",
-
-
-tsc oder 
-tsc "Dateiname"
-
-Build:
-Terminal -> Default Build konfigurieren
-strg+shift+b
-
-todo  ==== Types ==== 
-
-Type assertion:
-var test: any;
-test = 2; // typeof number
-test = "ik";c // typeof string
-test = []; // typeof array
-? ==> z.B.: String-Methoden bei "type: any"-Variablen nur über Type-Assertion:
-var nok = (test as string).toLowerCase(); 
-var ok = (<string>test).toLowerCase()
-
-enums are consts
-    export enum Settings {
-        user = "Ich",
-        admin = true
-    }
-    import { Settings } from....
-    Settings.user
-
-todo Init & Declaration 
-const data: string = "Here is my string";
-let simpleArray: number[] = [4, 2, 0];
-const schema: ANY = {
-    prop1: ....
-}
-
-todo  ==== Funktionen ==== 
-
-Parameter typisieren und default:
-function add(value1: number, value2: any, valueDefaultisiert: number = 1, ....){};
-
-
-todo  ==== Klassen ==== 
-
-private / public statt this im lustruktor
-class Fahrzeug{
-    
-    constructor(private/public name: string){
-        statt this.name = name;
-    }
-}
-
-Static => eine Variable oder Methode, die bei allen Subklassen gleich ist
-
-class Fahrzeug{
-    
-    static Fahrzeug.count: number; ==> count ist bei allen subklassen trotz Erhöhung in ihnen gleich
-
-    constructor(private name: string){
-        Fahrzeug.count++; ==> in jeder subklasse wird count erhöht
-    }
-
-}
-
-todo  ==== Interface ==== 
-
-Interface definiert ein Objekt, types alles andere
-
-Example:
-
-? ==> Definieren der Datentypen
-    interface Name {
-        firstName: string;
-    }
-
-? ==> Definieren, wie die Daten aus den Interface verarbeitet werden 
-    const nameCreator = (name: Name): string {
-        return  `Hello, ${name.firstName}`
-    };
-
-? Daten initialisiern
-    let myName = {firstName: "Steve"};
-
-? Interface verwenden
-    console.log(nameCreator(myName))
-
-
-todo  ==== Generic ==== 
-
-Example:
-
-? ==> Generic (T is 'open for type interpretation')
-    function nameCreator<T>(name: T): T {
-        return  name
-    };
-
-? Daten initialisiern
-    let myName= nameCreator<string>('WKD');
-    or
-    let myName= nameCreator<number>(2);
-
-
-todo  ==== Decorators ==== 
-
-function Dummy(){....};
-
-@Dummy              ==> Now the function is available in the class Message
-export default class Message{
-    name;
-    constructor(name){
-        this,name = name;
-    }
-}
 
 
 */
