@@ -716,6 +716,10 @@ navigator.geolocation.getCurrentPosition() für gps
 //? =============== Typescript  ==========
 //#region 
 /*
+
+Keynotes:
+Types und Interfaces in eigene Datei auslagern.
+
 todo  ==== Installiern & Kompilieren ==== 
 
 node:
@@ -736,6 +740,7 @@ oder
       "strict": true,
       "skipLibCheck": true,
       "target": "es6",
+      "strict": true; //?  zb muss bei Argumentübergabe null/undefined explizit angegebenen werden wenn man es möchte 
       "moduleResolution": "node",
       "sourceMap": true,
       "allowJs": true,
@@ -853,6 +858,8 @@ class Fahrzeug{
 
 todo  ==== Interface ==== 
 
+Interface definiert ein Objekt, types alles andere
+
 Example:
 
 ? ==> Definieren der Datentypen
@@ -884,7 +891,7 @@ Example:
 ? Daten initialisiern
     let myName= nameCreator<string>('WKD');
     or
-    let myName= nameCreator<numbrt>(2);
+    let myName= nameCreator<number>(2);
 
 
 todo  ==== Decorators ==== 
