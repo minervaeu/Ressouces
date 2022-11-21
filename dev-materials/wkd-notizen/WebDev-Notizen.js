@@ -145,27 +145,149 @@ class Fahrzeug{
 
 }
 
-todo  ==== Interface ==== 
 
-Interface definiert ein Objekt, types alles andere
+todo  ==== type ==== 
 
-Example:
+TYPE MUST START WITH CAPITAL LETTER!
 
-? ==> Definieren der Datentypen
-    interface Name {
-        firstName: string;
-    }
+type Like = {
+  username: string;
+  displayName: string;
+};
+type Share = {
+  username: string;
+  displayName: string;
+};
 
-? ==> Definieren, wie die Daten aus den Interface verarbeitet werden 
-    const nameCreator = (name: Name): string {
-        return  `Hello, ${name.firstName}`
+function getFriendNameFromEvent(event: Like | Share) {
+  return event.displayName || event.username;
+}
+
+
+
+todo  ==== INTERFACES & THERE ADVANCED OBJECT TYPES ====
+
+The biggest difference between interface and type is that interface can only be used to type objects, while type can be used to type objects, 
+primitives, and more. As it turns out, type is more versatile and functional than interface.
+
+==> Definieren
+interface Name {
+    firstName: string;
+}
+
+==> Verwenden
+const nameCreator = (name: Name): string {
+    return  `Hello, ${name.firstName}`
+};
+
+
+? Interfaces and Classes
+TypeScript gives us the ability to apply a type to an object/class with the implements keyword, like this:
+
+interface Robot {
+  identify: (id: number) => void;
+}
+ 
+class OneSeries implements Robot {
+  identify(id: number) {
+    console.log(`beep! I'm ${id.toFixed(2)}.`);
+  }
+  answerQuestion() {
+    console.log('42!');
+  }
+}
+
+In the example, there’s an interface named Robot and a class named OneSeries. The implements keyword is then used to apply the type Robot to OneSeries.
+Notice that Robot has an .identify() method. Since Robot is applied to OneSeries, OneSeries must include a method named .identify() that matches the Robot interface.
+Additionally, OneSeries can have methods and properties of its own, like the .answerQuestion() method.
+implements and interface allow us to create types that match a variety of class patterns, which makes interface a good tool for use on object-oriented programs.
+
+? Deep Types
+As our programs grow and become more complex, we’ll need to add more methods and properties to our objects to accommodate more features. 
+In fact, we may need to add nested methods and properties. Take a look at the following class:
+
+class OneSeries implements Robot {
+  about;
+ 
+  constructor(props: { general: { id: number; name: string; } }) {
+    this.about = props;
+  }
+ 
+  getRobotId() {
+    return `ID: ${this.about.general.id}`;
+  }
+}
+
+In this class, OneSeries expects to have an about property that is an object with a nested object inside it. Inside getRobotId(), 
+OneSeries returns this.about.general.id. To type an object nested inside another object, we could write an interface like this:
+
+interface Robot {
+  about: {
+    general: {
+      id: number;
+      name: string;
     };
+  };
+  getRobotId: () => string;
+}
+Notice that within the Robot interface, the general typed object is nested inside the about typed object. 
+TypeScript allows us to infinitely nest objects so that we can describe data correctly.
 
-? Daten initialisiern
-    let myName = {firstName: "Steve"};
+! You can nest interaces in Objects or Classes!
 
-? Interface verwenden
-    console.log(nameCreator(myName))
+? Extending Interfaces
+In TypeScript, it’s not always enough to be able to compose types together. Sometimes it’s convenient to copy all the type members from one type 
+into another type. We can accomplish this with the extends keyword, like in this example:
+
+interface Shape {
+  color: string;
+}
+interface Square extends Shape {
+  sideLength: number;
+}
+const mySquare: Square = { sideLength: 10, color: 'blue' };
+
+
+? Index Signatures
+When typing objects in TypeScript, sometimes it’s not possible to know the property names for an object, 
+like when we get back information from an outside data source/API. While we may not know the exact property names at compile-time, 
+we may know what the data will look like in general. In that case, it’s useful to write an object type that allows us to include a 
+variable name for the property name. This feature is called index signatures.
+
+Imagine we query a map API to get a list of latitudes where a solar eclipse can be viewed. The data might look like:
+{
+  '40.712776': true;
+  '41.203323': true;
+  '40.417286': false;
+}
+We know that all the property names will be strings, and all their values will be booleans, but we don’t know what the property
+names will be. To type this object, we can utilize an index signature to type this object. We could write this object’s type like this:
+
+interface SolarEclipse {
+  [latitude: string]: boolean;
+} 
+In the SolarEclipse type, there’s an index signature used for defining a variable property name of each type member. 
+The [latitude: string] syntax defines every property name within SolarEclipse as a string type with a value of type boolean. 
+In the [latitude: string] syntax, the latitude name is purely for us, the developer, as a human-readable name that will show up in potential error messages later.
+
+? Optional Type Members
+interface OptionsType {
+  name: string;
+  size?: string;
+}
+We can denote any type member as optional using the ? operator after the property name and before the colon (:), 
+like this: size?: string;. Since .size is optional, we added a conditional to check if it exists before trying to use the .size property.
+
+? Summary:
+We can use both interface and type keywords to declare types.
+interface is great for typing objects, especially within object-oriented programs.
+We can apply an interface on a class using the implements keyword.
+Object types can be nested infinitely.
+We can define multiple types and compose them together to organize our code and make it more flexible.
+We can copy the type members of one interface into another using the extends keyword.
+We can define variable property names within an object type with an index signature. An index signature uses syntax like: [propertyName: string]: string.
+It’s possible to make some type members optional, using the ? operator. The syntax looks like name?: string.
+
 
 
 todo  ==== Generic ==== 
@@ -182,6 +304,77 @@ Example:
     or
     let myName= nameCreator<number>(2);
 
+    ? Example:
+    ? Generische Datentypen erstellen
+    type Family<T> = {
+    parents: [T, T], mate: T, children: T[]
+    };
+    type Human = {name: string, job: string};
+    type Dog = {name: string, tailWagSpeed: number};
+
+    ? Generisch Datentypen benutzen
+    let theFamily: Family<number> = {
+    parents: [3, 4], mate: 9, children: [5, 30, 121]
+    };
+
+    let someFamily: Family<boolean> = {
+    parents: [true, true], mate: false, 
+    children: [false, false, true, true]
+    };
+
+    let aFamily: Family<Human> = {
+    parents: [
+        {name: 'Mom', job: 'software engineer'},
+        {name: 'Dad', job: 'coding engineer'}
+    ],
+    mate: {name: 'Matesky', job: 'engineering coder'},
+    children: [{name: 'Babesky', job: 'none'}]
+    };
+
+    let anotherFamily: Family<Dog> = {
+    parents: [
+        {name: 'Momo', tailWagSpeed: 3},
+        {name: 'Dado', tailWagSpeed: 100}
+    ],
+    mate: {name: 'Cheems', tailWagSpeed: 7},
+    children: [
+        {name: 'Puppin', tailWagSpeed: 0.001},
+        {name: 'Puppenaut', tailWagSpeed: 0.0001},
+        {name: 'Puppenator', tailWagSpeed: 0.01}
+    ]
+    };
+
+todo  ==== Generic Functions==== 
+
+function getFilledArray<T>(value: T, n: number): T[] {
+  return Array(n).fill(value);
+}
+The above code tells TypeScript to make sure that value and the returned array have the same type T. 
+When the function is invoked, we will provide T‘s value. For example, we can invoke the function using 
+getFilledArray<string>('cheese', 3), which sets T equal to string. This still evaluates to ['cheese', 'cheese', 'cheese'], 
+but the function is now correctly typed and less prone to errors. The function getFilledArray<string> is precisely the same 
+as if we had written (value: string, n: number): string[] in its type annotation.
+
+In general, writing generic functions with function functionName<T> allows us to use T within the type annotation as a type placeholder. Later, when the function is invoked, T is replaced with the provided type.
+
+? Example
+
+function getFilledArray<T>(value: T, n: number): T[] {
+  return Array(n).fill(value);
+}
+
+let stringArray: string[];
+let numberArray: number[];
+let personArray: {name: string, age: number}[];
+let coordinateArray: [number, number][];
+
+stringArray = getFilledArray<string>('hi', 6); 
+numberArray = getFilledArray<number>(9, 6); 
+personArray = getFilledArray<{name: string, age: number}>(
+  {name: 'J. Dean', age: 24}, 6
+);
+coordinateArray = getFilledArray<[number, number]>([3,4], 6); 
+
 
 todo  ==== Decorators ==== 
 
@@ -194,6 +387,93 @@ export default class Message{
         this,name = name;
     }
 }
+
+todo  ==== Function Types ==== 
+
+One of the neat things about TypeScript is that we can precisely control the kinds of functions assignable to a variable. 
+We do this using function types, which specify the argument types and return type of a function. Here’s an example of a 
+function type that is only compatible with functions that take in two string arguments and return a number.
+
+type StringsToNumberFunction = (arg0: string, arg1: string) => number;
+
+This syntax is just like arrow notation for functions, except instead of the 
+return value we put the return type. In this case, the return type is number.
+ Because this is just a type, we did not write the function body at all. 
+ A variable of type StringsToNumberFunction can be assigned any compatible function:
+
+
+todo  ==== Union Types ==== 
+
+? Defining Unions
+Unions allow us to define multiple allowed type members by separating each type member with a vertical line character |. 
+Examples:
+let ID: string | number;
+
+function getMarginLeft(margin: string | number) {
+  return { 'marginLeft': margin };
+}
+
+let userData: string | User = createUser();
+
+? Unions and Arrays
+To create a union that supports multiple types for an array’s values, wrap the union in parentheses (string | number), then use array notation []
+const timesList: (string | number)[] = [dateNumber, dateString];
+
+? Common Key Value Pairs
+When we put type members in a union, TypeScript will only allow us to use the common methods and properties that all members of the union share. Take this code:
+
+const batteryStatus: boolean | number = false;
+batteryStatus.toString(); // No TypeScript error
+batteryStatus.toFixed(2); // TypeScript error
+Since batteryStatus can be a boolean or a number, TypeScript will only allow us to call methods that both number and boolean share. They both share .toString(), so we’re good there. But, since only number has a .toFixed() method, 
+
+? Unions with Literal Types
+We can use literal types with TypeScript unions. Literal type unions are useful when we want to create distinct states within a program.
+For instance, if we were writing the code that controlled stoplights, we might write a program like this:
+
+type Color = 'green' | 'yellow' | 'red';
+function changeLight(color: Color) {
+}
+With the code above, we could ensure that wherever changeLight() is called, that it gets passed only allowed stoplight colors.
+If we tried to call changeLight('purple'), TypeScript would complain, since that is not a valid stoplight color.
+This technique allows us to write functions that are specific about the states they can handle, which helps us write code that’s less prone to errors.
+
+
+todo  ==== TYPE NARROWING ==== 
+
+? Using in with Type Guards
+As we write more types, we’re bound to create custom types to better describe our data’s properties and methods. While using typeof can get us pretty far, 
+sometimes we want to see if a specific method exists on a type instead of a type like 'string'. That’s where the in operator comes into play. The in operator 
+checks if a property exists on an object itself or anywhere within its prototype chain. Take a look at this example:
+
+type Tennis = {
+  serve: () => void;
+}
+type Soccer = {
+  kick: () => void;
+}
+
+function play(sport: Tennis | Soccer) {
+  if ('serve' in sport) {
+    return sport.serve();
+  }
+ 
+  if ('kick' in sport) {
+    return sport.kick();
+  }
+}
+
+In the example above, we check if the 'serve' property exists on sport with the in operator. The 'serve' property must exist inside the conditional, 
+so TypeScript can narrow sport‘s type inside the conditional to be of type Tennis. This type narrowing is possible because TypeScript recognizes in as a type guard.
+
+? Summary:
+TypeScript can understand how our code will execute at runtime so that it can infer more specific types while we write code. This is called type narrowing.
+An expression that checks if a variable is a specific type is called a type guard. Type guard’s allow TypeScript to recognize when it can type narrow.
+The typeof operator is useful when writing type guards. It can check if a variable is a 'string', 'number', 'boolean', or 'symbol'.
+The in operator is useful for checking if a specific property exists on an object. in is especially helpful when we have data represented as objects.
+TypeScript can type narrow after a type guard with an else block. TypeScript understands that that else block of an if statement must be the inverse condition of the if statement’s conditional.
+ypeScript can go even further and type narrow after a type guard if the type guard has a return or another terminal statement within its block, no else required.
+
 
 
 */
