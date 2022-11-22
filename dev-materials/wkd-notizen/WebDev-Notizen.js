@@ -867,6 +867,10 @@ cLient package.json:
 //? =============== Next.js ==============
 /*
 
+create app in current directory:
+npx create-next-app@latest ./ --ts --use-npm --git
+!Make sure no capitalized letters in the directory name!
+
 watch: npx next dev
 
 sass:
@@ -1048,8 +1052,8 @@ git push -u origin main
 git remote add origin https://github.com/StefanBartl/y.git
 git branch -M main
 git push -u origin main
+
 todo  ==== BRANCHES ==== 
- 
 
 Neuer branch:
 git checkout -b BRANCHNAME => wenn Branch angelegt ohne -b
@@ -1059,6 +1063,18 @@ Bei Konflikten:
 Per Hand lösen und dann nochmal mergen, committen
 Branch löschen:
 git branche -D BRANCHNAME, bei Konflikt nochmal für force oder merge
+
+
+todo  ==== Submodules ==== 
+https://github.blog/2016-02-01-working-with-submodules/
+
+You can add a repository as a submodule. In the parent repository:
+git submodule add https://github.com/<user>/<repo name> <local repo dir name>
+At this point, you’ll have the child folder inside the parent, 
+but if you were to peek inside that folder, depending on your version of Git, you might see … nothing.
+
+Newer versions of Git will do this automatically, but older versions will require you to explicitly tell Git to download the contents
+git submodule update --init --recursive
 
 
 
