@@ -13,7 +13,7 @@
 
 ***
 
-## Cargo / Crates, Bibliotheken, Module, Funktionen & Makros
+## Wichtige Cargo / Crates, Bibliotheken, Module, Funktionen & Makros
 
 ### Cargo / Crates
 - [Cargo](https://doc.rust-lang.org/cargo/) ist das Bau-System (build system) und der Paketmanager von Rust. Die meisten Rust-Entwickler verwenden dieses Werkzeug, um ihre Rust-Projekte zu verwalten, weil Cargo viele Aufgaben für dich erledigt, z.B. Bauen deines Codes, Herunterladen der Bibliotheken, von denen dein Code abhängt, und das Bauen dieser Bibliotheken. (Wir nennen Bibliotheken, die dein Code benötigt, Abhängigkeiten (dependencies))
@@ -47,34 +47,87 @@
 
 ### Wichtige Funktionen, Methoden & Makros 
 
+#### println!
 - [`println!`](https://doc.rust-lang.org/std/macro.println.html) gibt eine Zeichenkette auf dem Bildschirm aus, zb.: `println!("Rate die Zahl!");`
 - Mehrere Werte in `println` ausgeben: `println!("x = {} und y = {}", x, y);`
+- Das Makro `println!` kann diverse Formatierungen vornehmen. Die geschweiften Klammern weisen `println!` an, die Formatierung `Display` zu verwenden, bei der die Ausgabe direkt für den Endbenutzer bestimmt ist. Primitiven Typen implementieren Display standardmäßig, denn es gibt nur eine Möglichkeit, dem Benutzer eine `1` oder einen anderen primitiven Typ zu zeigen. Aber bei Strukturen `struct` ist die Formatierung, die `println!` verwenden soll, weniger klar, da es mehrere Darstellungsmöglichkeiten gibt: Möchte man Kommas oder nicht? Möchte man die geschweiften Klammern ausgeben? Sollen alle Felder angezeigt werden? Aufgrund der vielen Möglichkeiten versucht Rust nicht zu erraten, was man will. Strukturen haben daher keine Standardimplementierung von `Display`, um die mit `println!` und dem Platzhalter `{}` verwenden zu können. Der Compiler wweißt mit `std::fmt::Display is not implemented for...` genau auf diesen Fehler hin.
+- Der Makroaufruf `println!` kann dann in zb.: `println!("rect1 ist {:?}", rect1);` geändert werden. Wenn man das Symbol `:?` innerhalb der geschweiften Klammern angibt, teilt man `println!` mit, dass man das Ausgabeformat `Debug` verwenden möchte. Das Merkmal (trait) `Debug` ermöglicht es, die Struktur so auszugeben, dass Entwickler ihren Wert erkennen können, während sie den Code debuggen. Wichtig: Weiters muss auch noch `#[derive(Debug)]` direkt vor der `struct`-Definition eingefügt werden.  Bei größeren Strukturen ist es hilfreich, eine leichter lesbare Ausgabe zu erhalten. In diesen Fällen können wir {:#?} anstelle von {:?} in der println!-Meldung verwenden. 
   
+#### [dbg!](https://doc.rust-lang.org/std/macro.dbg.html)
+Eine andere Möglichkeit, einen Wert im Debug-Format auszugeben, ist die Verwendung des Makros `dbg!`, das die Eigentümerschaft eines Ausdrucks übernimmt (im Gegensatz zu `println!`, das eine Referenz nimmt), die Datei und Zeilennummer, in der der `dbg!`-Makroaufruf in deinem Code vorkommt, zusammen mit dem resultierenden Wert des Ausdrucks ausgibt und die Eigentümerschaft am Wert zurückgibt.
+
+- Der Aufruf des Makros `dbg!` schreibt in den Standard-Fehler-Konsolenstrom (`stderr`), im Gegensatz zu `println!`, das in den Standard-Ausgabe-Konsolenstrom (`stdout`) schreibt.
+
+                #[derive(Debug)]
+                struct Rectangle {
+                width: u32,
+                height: u32,
+                }
+
+                fn main() {
+                let scale = 2;
+                let rect1 = Rectangle {
+                        width: dbg!(30 * scale),
+                        height: 50,
+                };
+
+                dbg!(&rect1);
+                }
+
+Man kann `dbg!` zb.: um den Ausdruck `30 * scale` setzen, und da `dbg!` die Eigentümerschaft des Werts des Ausdrucks zurückgibt, erhält das Feld width denselben Wert, als wenn wir den `dbg!`-Aufruf dort nicht hätten. Wir wollen nicht, dass dbg! die Eigentümerschaft von `rect1` übernimmt, also übergeben wir eine Referenz auf `rect1` im nächsten Aufruf. So sieht die Ausgabe dieses Beispiels aus:
+
+                $ cargo run
+                Compiling rectangles v0.1.0 (file:///projects/rectangles)
+                Finished dev [unoptimized + debuginfo] target(s) in 0.61s
+                Running `target/debug/rectangles`
+                [src/main.rs:10] 30 * scale = 60
+                [src/main.rs:14] &rect1 = Rectangle {
+                width: 60,
+                height: 50,
+                }
+
+Man kann sehen, dass der erste Teil der Ausgabe von src/main.rs Zeile 10 stammt, wo der Ausdruck `30 * scale` debugged wird, und der resultierende Wert `60` ist (die Debug-Formatierung, die für Ganzzahlen implementiert ist, gibt nur deren Wert aus). Der `dbg!`-Aufruf in Zeile 14 von src/main.rs gibt den Wert von `&rect1` aus, der die Struktur `Rectangle` ist.
+
+
+#### read_line
 - [`read_line`](https://doc.rust-lang.org/std/io/struct.Stdin.html#method.read_line) ermöglicht es eine Benutzereingabe zu verarbeiten, zb.: `io::stdin().read_line(&mut guess)`. Das Zeichenketten-Argument muss veränderlich (`mut` bzw. `&mut`, um die Referenz `&` veränderlich zu machen) sein, damit die Methode den Inhalt der Zeichenkette ändern kann
 
+#### parse()
 - [`parse()`](https://doc.rust-lang.org/std/primitive.str.html#method.parse)-Methode für Strings  konvertiert eine Zeichenkette in einen anderen Typ. Die Methode parse funktioniert nur bei Zeichen, die logisch in Zahlen umgewandelt werden können. Wenn die Zeichenkette zum Beispiel A👍% enthielte, gäbe es keine Möglichkeit, dies in eine Zahl umzuwandeln. Da dies fehlschlagen könnte, gibt die parse-Methode einen Result-Typ zurück
 
+#### match()
 - [match](https://rust-lang-de.github.io/rustbook-de/ch06-02-match.html): Gleicht einen Wert mit einer Reihe von Mustern ab und führt dann Code zum jeweils passenden Muster aus. Stelle dir einen match-Ausdruck wie eine Münzsortiermaschine vor: Die Münzen rutschen eine Bahn mit unterschiedlich großen Löchern entlang, und jede Münze fällt durch das erste Loch, in das sie hineinpasst. Auf die gleiche Weise durchlaufen die Werte die Muster in einem match-Ausdruck und beim ersten „passenden“ Muster fällt der Wert in den zugehörigen Codeblock, der ausgeführt werden soll
 
+#### trim()
 - `trim()` Eliminiert Textumbrüche `/n` am Anfang und Ende eines Strings
   
+#### parse()
 - `parse()` Konvertiert einen Wert, welcher als String existiert in einen Zahlentyp, falls möglich, zb.: `"540"` zu `540`
   
+#### expect()
 - `expect()` Abfangen eines Fehlers. Nachricht an Benutzer in den Funktionsausdruck: `.expect("Hier Nachricht eingeben")` 
 
--`as_bytes()` wandelt einen `String` in einen Byte-Array um
-
+#### iter() & enumaerate()
 - `iter` ist ein Iterator, zb.: `for (i, &item) in bytes.iter().enumerate() {...}`
 - `enumerate()` umhüllt das Ergebnis und gibt jedes Element als Teil eines Tupel zurück. Das erste Element des Tupels, das von enumerate zurückgegeben wird, ist der Index, und das zweite Element ist eine Referenz auf das Element
 
+#### as_bytes() & b''
+-`as_bytes()` wandelt einen `String` in einen Byte-Array um
 - `b' '` - Byte-Literal-Syntax für Leerzeichen
 
+#### clear()
 - `clear()`; Leert Zeichenketten und macht sie gleich ""
 
 
+### Wichtige Merkmale (traits)
+
+#### [derive](https://rust-lang-de.github.io/rustbook-de/appendix-03-derivable-traits.html)
+
+Zusätzlich zum Merkmal Debug hat Rust eine Reihe von Merkmalen für uns bereitgestellt, die wir mit dem Attribut derive verwenden können und die unseren benutzerdefinierten Typen nützliches Verhalten verleihen können.
 
 
-### Wichtige Merkmale
+
+
 
 **Beispiel:** In Crate `rand`, eingebunden mit `rand::thread_rng().gen_range(1..=100);`, bedeutet...
 - `use rand::Rng;` Das Merkmal (trait) Rng definiert Methoden, die Zufallszahlengeneratoren implementieren, und dieses Merkmal muss im Gültigkeitsbereich sein, damit wir diese Methoden verwenden können
@@ -291,6 +344,8 @@ Diese Art von Zeichenkette kann nun verändert werden:
 
 Eine Struktur (struct) ist ein benutzerdefinierter Datentyp, mit dem man mehrere zusammenhängende Werte, die eine sinnvolle Gruppe bilden, zusammenpacken und benennen kann. Wie bei Tupeln können die Teile einer Struktur verschiedene Typen haben. Anders als bei Tupeln benennst du jedes Teil, damit ist klar, was die Werte bedeuten. Durch diese Namen sind Strukturen flexibler als Tupel: Du musst dich nicht auf die Reihenfolge der Daten verlassen, um die Werte einer Instanz zu spezifizieren oder auf sie zuzugreifen.
 
+Mit Strukturen kann man benutzerdefinierte Typen erstellen, die in deiner Domäne eine Bedeutung haben. Durch die Verwendung von Strukturen kann man zusammengehörige Datenteile miteinander verbunden halten und jedes Teil benennen, um deinen Code verständlich zu machen. In impl-Blöcken kann man Funktionen definieren, die mit deinem Typ assoziiert sind, und Methoden sind eine Art assoziierte Funktion, mit der man das Verhalten von Instanzen von Strukturen festlegen kann.
+
 Um eine Struktur zu definieren, geben wir das Schlüsselwort struct an und benennen die gesamte Struktur. Der Name einer Struktur sollte die Bedeutung der Daten beschreiben, die gruppiert werden. Dann definieren wir innerhalb geschweifter Klammern die Namen und Typen der Felder.
 
                 struct User {
@@ -305,13 +360,199 @@ Um eine Struktur zu definieren, geben wir das Schlüsselwort struct an und benen
 - Man muss die Felder nicht in der gleichen Reihenfolge angeben, in der man sie in der Struktur deklariert hat
 
                 fn main() {
-                let user1 = User {
+                let mut user1 = User {
                         email: String::from("jemand@example.com"),
                         username: String::from("benutzername123"),
                         active: true,
                         sign_in_count: 1,
                 };
+                 user1.email = String::from("andere-email@example.com");
                 }
+Hier wird eine `struct`-Instanz von `User` erzeugt. Da diese mit `mut` instanziert wurde, kann man sie verändern - dazu wird die Punktnotation verwendet.
+
+- Rust erlaubt es nicht nur einzelne Felder veränderlich zu machen. Die ganze Struktur muss `mut` sein
+
+                fn build_user(email: String, username: String) -> User {
+                User {
+                        email: email,
+                        username: username,
+                        active: true,
+                        sign_in_count: 1,
+                }
+                }
+Wie bei jeder `expression` kann auch eine Struktur implizit von einer Funktion zurückgegeben werden. `active` und `sign_in_count` sind hier hardcoded, `email` und `username` werden beim Funktionsaufruf als Argumente übergeben
+
+#### Kurznotation der Feld-Initialisierung (field init shorthand syntax) verwenden, wenn Variablen und Felder den gleichen Namen haben
+
+                fn build_user(email: String, username: String) -> User {
+                User {
+                        email,
+                        username,
+                        active: true,
+                        sign_in_count: 1,
+                }
+                }
+
+#### Instanzen aus anderen Instanzen erzeugen mit der Strukturaktualisierungssyntax (struct update syntax)
+
+
+                fn main() {
+                // --abschneiden--
+
+                let user2 = User {
+                        email: String::from("andere@example.com"),
+                        ..user1
+                                // Die Syntax '..user1' ist gleichbedeutend mit:
+                                // active: user1.active,
+                                // username: user1.username,
+                                // sign_in_count: user1.sign_in_count,
+                };
+                }
+ Das `..user1` muss an letzter Stelle stehen um festzulegen, dass alle verbleibenden Felder ihre Werte von den entsprechenden Feldern in `user1` beziehen sollen, aber man kann Werte für so viele Felder in beliebiger Reihenfolge angeben, unabhängig von der Reihenfolge der Felder in der `struct`-Definition
+
+- **WICHTIG:**
+- Beachte, dass die Strukturaktualisierungssyntax wie eine Zuweisung mit = ist, da sie die Daten verschiebt 
+- In diesem Beispiel kann manm `user1` nicht mehr verwenden, nachdem man `user2` erzeugt hat, weil der String im Feld `username` von `user1` in `user2` verschoben wurde. Hätte man `user2` neue String-Werte für die Felder `email` und `username` angegeben und somit nur die Werte `active` und `sign_in_count` von `user1` verwendet, wäre `user1` auch nach dem Erstellen von `user2` noch gültig. Die Typen `active` und `sign_in_count` sind Typen, die das Merkmal **Copy** implementieren
+
+#### Verwenden von Tupel-Strukturen (tuple structs) ohne benannte Felder um verschiedene Typen zu erzeugen
+
+-  Tupel-Strukturen sind Strukturen, die keine Feldnamen haben, sondern nur die Typen der Felder
+- Um eine Tupel-Struktur zu definieren, starte man dem Schlüsselwort `struct`, gefolgt vom Strukturnamen und den Typen im Tupel
+
+                struct Color(i32, i32, i32);
+                struct Point(i32, i32, i32);
+
+                fn main() {
+                let black = Color(0, 0, 0);
+                let origin = Point(0, 0, 0);
+                }
+Beachte, dass die Werte `black` und `origin` unterschiedliche Typen haben, weil sie Instanzen unterschiedlicher Tupel-Strukturen sind. Jede von dir definierte Struktur ist ein eigenständiger Typ, auch wenn die Felder innerhalb der Struktur die gleichen Typen haben könnten. Zum Beispiel kann eine Funktion, die einen Parameter vom Typ `Color` hat, keinen `Point` als Argument nehmen, obwohl beide Typen aus drei i32-Werten bestehen. Ansonsten ähneln Tupel-Struktur-Instanzen den Tupeln insofern, als dass sie in ihre einzelnen Teile zerlegt werden können, und du kannst ein `.` gefolgt vom Index verwenden, um auf einen einzelnen Wert zuzugreifen.
+
+#### Einheitstyp-ähnliche Strukturen (unit-like structs) ohne Felder 
+
+- Man kann auch Strukturen definieren, die gar keine Felder haben! Diese werden Einheitstyp (unit-like structs) genannt, weil sie sich ähnlich zum leeren Tupel () verhalten
+- Einheitstypen können in Situationen nützlich sein, in denen man ein Merkmal (trait) zu einem Typ implementieren muss, man aber keine Daten hat, die im Typ gespeichert werden sollen
+
+                struct AlwaysEqual;
+
+                fn main() {
+                let subject = AlwaysEqual;
+                }
+
+#### Eigentümerschaft von Strukturdaten
+
+- In der Strukturdefinition weiter oben haben wir den Typ `String` anstelle von `&str` verwendet. Dies ist eine bewusste Entscheidung, denn wir wollen, dass Instanzen dieser Struktur all ihre Daten besitzen und diese Daten so lange gültig sind, wie die gesamte Struktur gültig ist
+- Bei Strukturen ist es möglich, Referenzen auf Daten zu speichern, die im Besitz von etwas anderem sind, aber das erfordert die Verwendung von Lebensdauern (lifetime), einer Rust-Funktionalität. Diese stellt sicher, dass die von einer Struktur referenzierten Daten so lange gültig sind, wie die Struktur gültig ist
+
+
+
+***
+
+
+
+
+### [Methoden](https://rust-lang-de.github.io/rustbook-de/ch05-03-method-syntax.html) 
+
+Methoden sind Funktionen recht ähnlich: 
+- Sie werden mit dem Schlüsselwort `fn` und ihrem Namen deklariert, sie können Parameter und einen Rückgabewert haben, und sie enthalten etwas Code, der ausgeführt wird, wenn sie aufgerufen werden
+- Methoden unterscheiden sich jedoch von Funktionen dadurch, dass sie im Kontext einer Struktur (struct) (oder einer Aufzählung (enum) oder eines Merkmalsobjektes (trait object)) definiert werden und ihr erster Parameter stets `self` ist
+- `self` repräsentiert die Instanz der Struktur, zu der die Methode aufgerufen wird
+
+Beispiel: Methode `area` auf der Struktur `Rectangle` definieren:
+
+                struct Rectangle {
+                width: u32,
+                height: u32,
+                }
+
+                impl Rectangle { // Alles in diesem Block wird mit dem Typ `Rectangle` assoziiert
+                fn area(&self) -> u32 { // Erster Parameter wird `&self`
+                        self.width * self.height // Man referenziert `width` & `height` auf `self` (Rectangle-Instanz)
+                }
+                }
+
+                fn main() {
+                let rect1 = Rectangle {
+                        width: 30,
+                        height: 50,
+                };
+
+                println!(
+                        "Die Fläche des Rechtecks ist {} Quadratpixel.",
+                        rect1.area() // Methode `area` wird aufgerufen und die Argumente der Instanz `rect1` übergeben
+                );
+                }
+
+Um die Funktion im Kontext von Rectangle zu definieren, beginnen man mit dem Block `impl` (Implementierung) für `Rectangle`. Alles in diesem Block wird mit dem Typ `Rectangle` assoziiert. Dann verschiebt man die entweder zuvor gescriebene Funktion `area` in die geschweiften Klammern von `impl` oder schreibt sie direkt dort hinein. Man ändert den ersten (und in diesem Fall einzigen) Parameter zu `self` (eine Referemz darauf) und passt den Methodenrumpf entsprechend an.
+In `main` wird die Methodensyntax verwendet: Auf die `rect1`-Instanz wird die Methode `area()` aufgerufen.  
+
+- In der Methoden-Signatur von verwendet man `&self` anstelle von `rectangle: &Rectangle` und meint die `struct` in der sie implementiert wurde
+- Das `&self` ist eigentlich die Abkürzung für `self: &Self`
+- Durch das Aufrufen der Methode auf einer Instanz, meint `&self` dann genau diese aufrufende Instanz
+- Innerhalb eines `impl`-Blocks ist der Typ Self ein Alias für den Typ, für den der `impl`-Block steht
+- Methoden müssen einen Parameter mit dem Namen self vom Typ `Self` als ihren ersten Parameter haben, Rust lässt dies abkürzen, indem man nur den Namen `self` an der Stelle des ersten Parameters angibt
+- Beachte, dass man immer noch das `&` vor der Abkürzung `self` verwenden muss, um anzuzeigen, dass diese Methode die Instanz `Self` ausleiht
+-  Methoden können die Eigentümerschaft von self übernehmen, self unveränderlich ausleihen, wie wir es hier getan haben, oder self veränderlich ausleihen, so wie bei jedem anderen Parameter auch
+-  Oben wurde `&self` aus dem gleichen Grund gewählt wie `&Rectangle` in der Funktionsvariante: Man will hier keine Eigentümerschaft übernehmen, man will die Daten der Struktur nur lesen, nicht schreiben
+-  Wenn man die Instanzdaten ändern wollten, müssten wir `&mut self` als ersten Parameter verwenden
+-  Methode können denselben Namen haben wie eines der Felder der Struktur
+
+#### getter
+
+Oft, aber nicht immer, werden Methoden mit demselben Namen wie ein Feld so definiert, dass sie nur den Wert des Feldes zurückgeben und nichts anderes tun. Methoden wie diese werden `getters` genannt, und Rust implementiert sie nicht automatisch für Strukturfelder, wie es einige andere Sprachen tun. **Getter sind nützlich, weil man das Feld als privat, die Methode aber als öffentlich kennzeichnen und so den Nur-Lese-Zugriff auf dieses Feld als Teil der öffentlichen API des Typs erhält.**
+
+
+
+#### setter
+
+....
+
+#### Assoziierte Funktionen
+
+- Alle Funktionen, die innerhalb eines `impl`-Blocks definiert sind, werden assoziierte Funktionen genannt, weil sie mit dem Typ assoziiert sind, der nach dem `impl` benannt ist 
+- Man kann assoziierte Funktionen definieren, die nicht `self` als ihren ersten Parameter haben (und somit keine Methoden sind), weil sie keine Instanz des Typs benötigen, um damit zu arbeiten
+- Assoziierte Funktionen, die keine Methoden sind, werden oft als Konstruktoren verwendet, die eine neue Instanz der Struktur zurückgeben zb.: `::new` bei `String::new()`
+
+                impl Rectangle {
+                fn square(size: u32) -> Self {
+                        Rectangle {
+                        width: size,
+                        height: size,
+                        }
+                }
+                }
+Die Schlüsselwörter `Self` im Rückgabetyp und im Rumpf der Funktion sind Aliase für den Typ, der nach dem Schlüsselwort impl steht, in diesem Fall `Rectangle`. Um diese assoziierte Funktion aufzurufen, verwenden wir die Syntax :: mit dem Strukturnamen, z.B. let sq = Rectangle::square(3);. Diese Funktion gehört zum Namensraum der Struktur: Die Syntax :: wird sowohl für assoziierte Funktionen als auch für Namensräume, die von Modulen erzeugt werden, verwendet.
+
+
+### [Aufzählungen (enums) und Musterabgleich (pattern matching)](https://rust-lang-de.github.io/rustbook-de/ch06-00-enums.html)
+
+Aufzählungen erlauben es, einen Typ durch Aufzählung seiner möglichen Varianten (variants) zu definieren. Während Strukturen (structs) eine Möglichkeit bieten, zusammengehörige Felder und Daten zu gruppieren, wie ein Rectangle mit seiner width und height, bieten Aufzählungen (enums) eine Möglichkeit, einen Wert als einen aus einer möglichen Gruppe von Werten anzugeben.
+
+- Ein Aufzählungswert nur einen seiner Varianten sein
+
+                enum IpAddrKind {
+                V4,
+                V6,
+                }
+IpAddrKind ist jetzt ein benutzerdefinierter Datentyp, den man an anderer Stelle im Code verwenden kann.
+
+#### Werte in Aufzählungen
+
+- Erstell von Instanzen beider Varianten:
+
+                let four = IpAddrKind::V4;
+                let six = IpAddrKind::V6;
+
+Die Varianten der Aufzählung werdeb mit dem Namensraum des Bezeichners angegeben sind und können mit einen doppelten Doppelpunkt verwendet werden, um die beiden zu trennen. Das ist sinnvoll, weil beide Werte IpAddrKind::V4 und IpAddrKind::V6 vom gleichen Typ sind: IpAddrKind. Man kann dann zum Beispiel eine Funktion definieren, die jedes IpAddrKind annimmt:
+
+                fn route(ip_kind: IpAddrKind) {}
+
+Und man kann diese Funktion mit beiden Varianten aufrufen:
+
+                route(IpAddrKind::V4);
+                route(IpAddrKind::V6);
+
+
 
 
 
@@ -816,7 +1057,6 @@ Dies ist eine gültige Funktion: Mit `-> i32` ist der Rückgabetyp annotiert und
 
 Beim Ausführen dieses Codes wird Der Wert von x ist: 6 ausgegeben. Wenn wir aber ein Semikolon an das Ende der Zeile mit x + 1 setzen und es von einem Ausdruck in eine Anweisung ändern, erhält man einen Fehler.
 
-- Eine assoziierte Funktion wird eine Funktion geanannt, die auf einem Typ implementiert ist, zb.: `::new` bei `String::new()` (In etwa wie eine Methode eines Javascript-Objektes)
 
 
 
@@ -993,23 +1233,6 @@ Ausdrücke geben implizit den Einheitswert zurück, wenn sie keinen anderen Wert
 
 
 
-## Concurrency (thread)
-
-Rust hat multi-paradigma, Library-based concurrency
-
-#### std:thread
-
-                fn main(){
-                        let mut dst = Vec::nee();
-                        thread::spawn(move || {
-                                dst.push(3);
-                        });
-                }
-
-Erstell neuen Vector `dst`, macht dann einen neuen thread auf indem `dst` um `3` parralel zum `main` thread erweitert wird.
-
-
-
 ## unsafe Rust
 
 `unsafe`-Rust ist ein Superset von Rust, dass erlaubt Regeln zu brechen. Man sagt dem Compiler im Grunde "Vertrau mir in diesem Closure". Das `unsafe`-closure wird wir folgt deklariert:
@@ -1039,6 +1262,9 @@ Erstell neuen Vector `dst`, macht dann einen neuen thread auf indem `dst` um `3`
 
 Merke:
 Zeichenkettenanteilstyp: Verweis auf einen Teil eines Strings
-5.1
+
+6.1
+
 Images:
 ![StringAllocation_2](str02.svg)
+
