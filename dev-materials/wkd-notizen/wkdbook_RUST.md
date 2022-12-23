@@ -97,6 +97,8 @@ Man kann sehen, dass der erste Teil der Ausgabe von src/main.rs Zeile 10 stammt,
 
 #### match()
 - [match](https://rust-lang-de.github.io/rustbook-de/ch06-02-match.html): Gleicht einen Wert mit einer Reihe von Mustern ab und führt dann Code zum jeweils passenden Muster aus. Stelle dir einen match-Ausdruck wie eine Münzsortiermaschine vor: Die Münzen rutschen eine Bahn mit unterschiedlich großen Löchern entlang, und jede Münze fällt durch das erste Loch, in das sie hineinpasst. Auf die gleiche Weise durchlaufen die Werte die Muster in einem match-Ausdruck und beim ersten „passenden“ Muster fällt der Wert in den zugehörigen Codeblock, der ausgeführt werden soll
+- `other => move_player(other)` - `other` ist ein Auffangzweig, bei dem man den aufgefangenen Wert weiter verwenden kann
+- `_ => somefunction(),` oder `_ => (),`  - `_` ist ein Auffangzweig, bei dem man den aufgefangenen Wert nicht weiter verwenden kann. RRust warnt dann nicht vor einer ungenützten Variable. Hie
 
 #### trim()
 - `trim()` Eliminiert Textumbrüche `/n` am Anfang und Ende eines Strings
@@ -1268,3 +1270,4 @@ Zeichenkettenanteilstyp: Verweis auf einen Teil eines Strings
 Images:
 ![StringAllocation_2](str02.svg)
 
+match
