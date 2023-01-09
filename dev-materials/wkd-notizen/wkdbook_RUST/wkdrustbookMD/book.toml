@@ -1,0 +1,6 @@
+[book]
+authors = ["WKD-Main-CPU"]
+language = "en"
+multilingual = false
+src = "src"
+title = "wkd"

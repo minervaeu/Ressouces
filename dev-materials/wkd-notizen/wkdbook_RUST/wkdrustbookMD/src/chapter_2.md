@@ -573,7 +573,7 @@ Die Schlüsselwörter `Self` im Rückgabetyp und im Rumpf der Funktion sind Alia
 
 ### [Aufzählungen (enums) und Musterabgleich (pattern matching)](https://rust-lang-de.github.io/rustbook-de/ch06-00-enums.html)
 
-Aufzählungen erlauben es, einen Typ durch Aufzählung seiner möglichen Varianten (variants) zu definieren. Während Strukturen (structs) eine Möglichkeit bieten, zusammengehörige Felder und Daten zu gruppieren, wie ein Rectangle mit seiner width und height, bieten Aufzählungen (enums) eine Möglichkeit, einen Wert als einen aus einer möglichen Gruppe von Werten anzugeben. In Rust ist jedes Enum ein Struct.
+Aufzählungen erlauben es, einen Typ durch Aufzählung seiner möglichen Varianten (variants) zu definieren. Während Strukturen (structs) eine Möglichkeit bieten, zusammengehörige Felder und Daten zu gruppieren, wie ein Rectangle mit seiner width und height, bieten Aufzählungen (enums) eine Möglichkeit, einen Wert als einen aus einer möglichen Gruppe von Werten anzugeben.
 
 - Ein Aufzählungswert nur einen seiner Varianten sein
 
@@ -1215,20 +1215,6 @@ Alle Datentypen, die am Stack abgelegt werden können haben ein bekannte Größe
 
 ***
 
-## Asynchrones Pogrammieren
-
-Die asynchrone Programmierung ermöglicht hochleistungsfähige Implementierungen und bietet gleichzeitig Benutzerfreundlichkeit.
-Die Implementierung in Rust unterscheidet sich in einigen Merkmalen, z.b.:
-
-1. Futures/Promises sind in Rust "träge" und machen nur Fortschritte, wenn sie abgefragt werden. Das "droppen" eines Futures verhindert, dass es weitere Fortschritte macht
-2. Async ist in Rust kostenlos (zero-cost), was bedeutet, dass Sie nur für das bezahlen, was Sie verwenden. (Gemeint ist die Rechenlast) Insbesondere können Sie async ohne Zuweisungen auf den Heap und dynamischen Versand verwenden, was für die Leistung großartig ist! Dadurch können Sie Async auch in eingeschränkten Umgebungen wie eingebetteten Systemen verwenden.
-
-
-
-Quelle: 4
-
-***
-
 ## Werte
 
 ### Result
@@ -1251,8 +1237,6 @@ Ausdrücke geben implizit den Einheitswert zurück, wenn sie keinen anderen Wert
 
 ***
 
-
-
 ## unsafe Rust
 
 `unsafe`-Rust ist ein Superset von Rust, dass erlaubt Regeln zu brechen. Man sagt dem Compiler im Grunde "Vertrau mir in diesem Closure". Das `unsafe`-closure wird wir folgt deklariert:
@@ -1268,7 +1252,6 @@ Ausdrücke geben implizit den Einheitswert zurück, wenn sie keinen anderen Wert
 1. [rustbook-Deutsch](https://rust-lang-de.github.io/rustbook-de/)
 2. ["Diving Into Rust For The First Time" - Coding Tech, Youtube-Video (Dauer: 01:10:29)](https://www.youtube.com/watch?v=_jMSrMex6R0&list=PLFjq8z-aGyQ6t_LGp7wqHsHTYO-pDDx84)
 3. [into-rust](http://intorust.com/)
-4. [async-book](https://github.com/rust-lang/async-book)
 
 ## Hints
 
